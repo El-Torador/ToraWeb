@@ -1,8 +1,9 @@
 import React from 'react';
 import AppRouter from './Routes/AppRouter';
+import { toast } from 'react-toastify'
 
-
-function App() {
+toast.configure()
+const App = () => {
   return (
     <AppRouter/>
   );
