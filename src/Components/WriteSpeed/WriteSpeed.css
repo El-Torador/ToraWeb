@@ -1,0 +1,25 @@
+#title {
+    position: absolute;
+    top: 40px;
+    right: 30%;
+    letter-spacing: 0.05em;
+    font-family: 'chiller';
+    font-size: 70px;
+    border-right: solid turquoise;
+    animation: blink 1s step-end infinite;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@keyframes blink {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: turquoise;
+    }
+}
