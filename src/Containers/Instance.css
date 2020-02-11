@@ -1,0 +1,11 @@
+.is_fix{
+    position: fixed;
+    bottom: 35px;
+    right: 20px;
+}
+.padding{
+    padding: 50px 50px;
+}
+.add-margin{
+    margin-bottom: 10px !important;
+}
