@@ -19,3 +19,10 @@
 #root>.grid {
     height: 100%;
 }
+
+.ption{
+    position: absolute;
+    bottom: 45%;
+    left: 45%;
+    color: gray;
+}
