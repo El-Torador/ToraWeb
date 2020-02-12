@@ -1,13 +1,13 @@
 import React from 'react'
-
-/**
- * HEADER COMPONENT
- */
-import { Menu, Button} from 'semantic-ui-react'
+import { Menu, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './Header.css'
 import image from '../../assets/images/iai.png'
 import PropTypes from 'prop-types'
+
+/**
+ * HEADER COMPONENT
+ */
 const Head = (props) =>{
     return (
       <div>
