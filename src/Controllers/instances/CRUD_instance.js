@@ -41,15 +41,15 @@ export const getInstanceById = (id) =>{
  * POST INSTANCE
  * @param {object} options
  * @param {string} options.name
- * @param {string} options.place
+ * @param {string} options.city
  * @param {string} options.address
- * @param {boolean} options.chief
- * @param {number} options.phone 
+ * @param {boolean} options.responsable
+ * @param {number} options.phone_number 
  * @return Promise
  */
 export const addInstance = options => {
     return new Promise((resolve, reject) => {
-        if (options.name && options.place && options.address && options.chief && options.phone) {
+        if (options.name && options.city && options.address && options.responsable && options.phone_number) {
             axios.post(types.END_POINT + '/instance/add', options, types.config)
                 .then((phone) => {
                     resolve(phone)
@@ -67,16 +67,16 @@ export const addInstance = options => {
  * PUT phone
  * @param {object} options
  * @param {string} options.name
- * @param {string} options.place
+ * @param {string} options.city
  * @param {string} options.address
- * @param {boolean} options.chief
- * @param {number} options.phone 
+ * @param {boolean} options.responsable
+ * @param {number} options.phone_number 
  * @param {number} id 
  * @return Promise
  */
 export const editInstance = (options, id) => {
     return new Promise((resolve, reject) => {
-        if (options.name && options.place && options.address && options.chief && options.phone) {
+        if (options.name && options.city && options.address && options.responsable && options.phone_number) {
             axios.put(types.END_POINT + '/phone/' + id, options, types.config)
                 .then((result) => {
                     resolve(result)
