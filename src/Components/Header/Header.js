@@ -18,10 +18,10 @@ const Head = (props) =>{
           />
           <Menu.Item
             as={Link}
-            to="/"
+            to="/home"
             icon="home"
             title="Acceuil"
-            active={props.location === "/" ? true : false}
+            active={props.location === "/home" ? true : false}
           />
           <Menu.Item
             as={Link}
