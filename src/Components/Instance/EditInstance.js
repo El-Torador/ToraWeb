@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { getInstanceById, editInstance } from '../../Controllers/instances/CRUD_instance'
 import Head from '../Header/Header'
-import { Loader, Modal, Button, Icon, Header } from 'semantic-ui-react'
+import { Loader, Button, Icon } from 'semantic-ui-react'
+import ModalLogout from '../Sections/ModalLogout'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import 'react-select2-wrapper/css/select2.css'
 import {
   DateInput
 } from "semantic-ui-calendar-react";
 
+/**
+ * EDIT INSTANCE COMPONENT
+ */
 class EditInstance extends Component {
     constructor(props){
         super(props)
@@ -93,10 +96,6 @@ class EditInstance extends Component {
     
     render() { 
         const { instance } = this.state
-        const letterThanNumber = ()=>{
-          let letter = ['one', 'two', 'tree', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
-          return letter[this.state.instance.phone_number.length]
-        }
         if(this.state.isLoading){
             return <div>
             <Head location="/instance" handleOpen={this.handleOpen}  />
@@ -120,6 +119,9 @@ class EditInstance extends Component {
                           <input
                             type="text"
                             name="name"
+                            minLength="4"
+                            autoCapitalize
+                            autoFocus
                             placeholder="Nom"
                             title="Nom"
                             defaultValue={instance.name}
@@ -134,6 +136,7 @@ class EditInstance extends Component {
                           <input
                             type="text"
                             name="city"
+                            minLength="4"
                             placeholder="Ville"
                             title="Ville"
                             defaultValue={instance.city}
@@ -147,6 +150,7 @@ class EditInstance extends Component {
                           <i className="icon map pin"></i>
                           <input
                             type="text"
+                            minLength="3"
                             name="address"
                             placeholder="Adresse"
                             title="Adresse"
@@ -161,6 +165,7 @@ class EditInstance extends Component {
                           <i className="icon user secret"></i>
                           <input
                             type="text"
+                            minLength="4"
                             name="chief"
                             placeholder="Responsable ou Chef de centre"
                             title="Responsable ou Chef de centre"
@@ -170,42 +175,21 @@ class EditInstance extends Component {
                           />
                         </div>
                       </div>
-                      {this.state.instance.phone_number.length > 1 ? (
-                        <div className={letterThanNumber() + " fields"}>
-                          {instance.phone_number.map((v, index) => (
-                            <div className="field" key={index}>
-                              <div className="ui left icon input">
-                                <i className="icon phone"></i>
-                                <input
-                                  type="text"
-                                  name="phone_number"
-                                  placeholder={"Téléphone " + (index + 1)}
-                                  title={"Téléphone " + (index + 1)}
-                                  id={"p" + index}
-                                  defaultValue={v}
-                                  autoComplete="off"
-                                  required
-                                />
-                              </div>
-                            </div>
-                          ))}
+                      <div className="field">
+                        <div className="ui left icon input">
+                          <i className="icon phone"></i>
+                          <input
+                            type="tel"
+                            pattern="[0-9]{9}"
+                            name="phone_number"
+                            placeholder="Téléphone"
+                            title="Téléphone"
+                            defaultValue={instance.phone_number.join('-')}
+                            autoComplete="off"
+                            required
+                          />
                         </div>
-                      ) : (
-                        <div className="field">
-                          <div className="ui left icon input">
-                            <i className="icon phone"></i>
-                            <input
-                              type="text"
-                              name="phone_number"
-                              placeholder="Téléphone"
-                              title="Téléphone"
-                              defaultValue={instance.phone_number[0]}
-                              autoComplete="off"
-                              required
-                            />
-                          </div>
-                        </div>
-                      )}
+                      </div>
                       <div className="field">
                         <DateInput
                           closable={true}
@@ -237,59 +221,7 @@ class EditInstance extends Component {
                     </div>
                   </form>
                 </div>
-                <Modal
-                  open={this.state.modalOpen}
-                  onClose={this.handleClose}
-                  basic
-                  closeOnDimmerClick={false}
-                  size="small"
-                >
-                  <Header icon="log out" content="Déconnection" />
-                  <Modal.Content>
-                    <h3>Voulez-vous vraiment vous déconnecter ?</h3>
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button
-                      basic
-                      color="red"
-                      onClick={this.handleClose}
-                      inverted
-                    >
-                      <Icon name="remove" /> Non
-                    </Button>
-                    <Link to="/">
-                      <Button color="yellow" inverted>
-                        <Icon name="checkmark" /> Oui
-                      </Button>
-                    </Link>
-                  </Modal.Actions>
-                </Modal>
-                <Modal
-                  open={this.state.modalOpen}
-                  onClose={this.handleClose}
-                  basic
-                  size="small"
-                >
-                  <Header icon="log out" content="Déconnection" />
-                  <Modal.Content>
-                    <h3>Vouvez-vous vraiment vous déconnecter ?</h3>
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button
-                      basic
-                      color="red"
-                      onClick={this.handleClose}
-                      inverted
-                    >
-                      <Icon name="remove" /> Non
-                    </Button>
-                    <Link to="/">
-                      <Button color="yellow" inverted>
-                        <Icon name="checkmark" /> Oui
-                      </Button>
-                    </Link>
-                  </Modal.Actions>
-                </Modal>
+                <ModalLogout modalOpen={this.state.modalOpen} onClose={this.handleClose} />
               </div>
             );
         }
