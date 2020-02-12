@@ -110,7 +110,7 @@ class Instance extends Component {
                   <i className="icon plus"></i>
                 </button>
                 <ModalLogout modalOpen={this.state.modalOpen} onClose={this.handleClose} />
-                <AddInstance date={this.state.date} addInstance={this.state.addInstance} exit={this.exit} />
+                <AddInstance addInstance={this.state.addInstance} exit={this.exit} />
               </div>
             );
         }
