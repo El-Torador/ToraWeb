@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import FilterResults from 'react-filter-search'
 import Fade from 'react-reveal/Fade'
 import PropTypes from 'prop-types'
+
+/**
+ * LIST INSTANCE COMPONENT (<ROWINSTANCE/>)
+ */
 const RowInstance = (props) =>{
     
         if(props.instance){
