@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import MaterialTable from 'material-table'
 import { toast } from 'react-toastify'
-import { Loader, Modal, Button, Icon, Header } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
+import ModalLogout from '../Components/Sections/ModalLogout'
 import Head from '../Components/Header/Header'
-import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 import { getUsers, addUser, editUser, deleteUser } from '../Controllers/users/CRUD_users'
 import { getInstance } from '../Controllers/instances/CRUD_instance'
+
+/**
+ * USER CONTAINER
+ */
 class User extends Component {
     constructor(props){
         super(props)
+        toast.configure()
         this.state = {
             data: [],
             isLoading: true,
@@ -41,23 +46,43 @@ class User extends Component {
             
          
     }
-
+    /**
+     * METHODE LANCE LORSQUE LE COMPOSANT EST MONTE DANS LE DOM
+     */
      componentDidMount(){
             getUsers().then((data)=>{
-                getInstance().then((instances)=>{
-                  instances.map((item)=> this.columns[5].lookup[item.id] = item.name)
-
-                  this.setState({ data, isLoading: false })
-                }).catch((err) => {
-                this.setState({ isLoading: false }, () => toast.error(err, {
-                position: 'bottom-left',
-                hideProgressBar: true
-              }))
-                  console.log(err)
-                })
+                if(data){
+                  getInstance().then((instances) => {
+                    if(instances){
+                      instances.map((item) => this.columns[5].lookup[item.id] = item.name)
+                      this.setState({ data, isLoading: false })
+                    }else{
+                      toast.info('ℹ️ Aucune instance enregistré, Veuillez Ajouter une instance avant de continuer.', {
+                        position: 'bottom-left',
+                        hideProgressBar: true,
+                        onClose: ()=>{
+                          this.props.history.push('/instance')
+                        }
+                      })
+                    }
+                  }).catch((err) => {
+                    console.log(err)
+                    this.setState({ isLoading: false }, () => toast.error('❌'+err.message, {
+                      position: 'bottom-left',
+                      hideProgressBar: true
+                    }))
+                    console.log(err)
+                  })
+                }else{
+                  toast.info('ℹ️ Pas d\'utilisateur enregistré.', {
+                    position: 'bottom-left',
+                    hideProgressBar: true
+                  })
+                }
             })
             .catch((err)=>{
-              this.setState({ isLoading: false }, () => toast.error(err, {
+              console.log(err)
+              this.setState({ isLoading: false }, () => toast.error('❌'+err.message, {
                 position: 'bottom-left',
                 hideProgressBar: true
               }))
@@ -75,6 +100,8 @@ class User extends Component {
    * PERMET DE FERMER LA MODAL
    */
   handleClose = () => this.setState({ modalOpen: false })
+
+
     render(){
         if(this.state.isLoading){
             return <div>
@@ -178,33 +205,7 @@ class User extends Component {
                  }}
                     />
                   </Fade>
-                  <Modal
-                    open={this.state.modalOpen}
-                    onClose={this.handleClose}
-                    basic
-                    closeOnDimmerClick={false}
-                    size="small"
-                  >
-                    <Header icon="log out" content="Déconnection" />
-                    <Modal.Content>
-                      <h3>Vouvez-vous vraiment vous déconnecter ?</h3>
-                    </Modal.Content>
-                    <Modal.Actions>
-                      <Button
-                        basic
-                        color="red"
-                        onClick={this.handleClose}
-                        inverted
-                      >
-                        <Icon name="remove" /> Non
-                    </Button>
-                      <Link to="/">
-                        <Button color="yellow" inverted>
-                          <Icon name="checkmark" /> Oui
-                      </Button>
-                      </Link>
-                    </Modal.Actions>
-                  </Modal>
+                 <ModalLogout modalOpen={this.state.modalOpen} onClose={this.handleClose} />
                     </div>
                 </div>
             )
