@@ -1,4 +1,8 @@
 import React from 'react'
+
+/**
+ * HEADER COMPONENT
+ */
 import { Menu, Button} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './Header.css'
