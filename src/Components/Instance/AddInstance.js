@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
+//import moment from 'moment'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { Modal, Icon, Button, Header } from 'semantic-ui-react'
