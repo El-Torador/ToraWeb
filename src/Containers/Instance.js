@@ -55,27 +55,25 @@ class Instance extends Component {
     
     
     /**
-     * PERMET D'OUVRIR LA MODAL
+     * PERMET D'OUVRIR OU DE FERMER LA MODAL DE DECONNEXION
      */
-    handleOpen = () => this.setState({ modalOpen: true })
-    /**
-     * PERMET DE FERMER LA MODAL
-     */
-    handleClose = () => this.setState({ modalOpen: false })
-    handleAddInstance = () => this.setState({addInstance: true})
-    exit = () => this.setState({addInstance: false})
+    toggleModal = () => this.setState({ modalOpen: !this.state.modalOpen })
+   /**
+    * PERMET D'OUVRIR OU DE FERMER LA MODAL D'AJOUT D'INSTANCE
+    */
+    toggleModalAddInstance = () => this.setState({addInstance: !this.state.addInstance})
     render() { 
         if(this.state.isLoading){
             return (
               <div>
-                <Head location="/instance" handleOpen={this.handleOpen} />
+                <Head location="/instance" handleOpen={this.toggleModal} />
                 <Loader active={true} />
               </div>
             );
         }else{
             return (
               <div>
-                <Head location="/instance" handleOpen={this.handleOpen} />
+                <Head location="/instance" handleOpen={this.toggleModal} />
                 <br />
                 <div className="ui container padding">
                   <h1>
@@ -105,12 +103,12 @@ class Instance extends Component {
                 <button
                   className="circular ui icon massive button is_fix"
                   title="Ajouter une instance"
-                  onClick={this.handleAddInstance}
+                  onClick={this.toggleModalAddInstance}
                 >
                   <i className="icon plus"></i>
                 </button>
-                <ModalLogout modalOpen={this.state.modalOpen} onClose={this.handleClose} />
-                <AddInstance addInstance={this.state.addInstance} exit={this.exit} />
+                <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
+                <AddInstance addInstance={this.state.addInstance} exit={this.toggleModalAddInstance} />
               </div>
             );
         }
