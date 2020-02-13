@@ -93,25 +93,20 @@ class User extends Component {
     }
 
   /**
-* PERMET D'OUVRIR LA MODAL
+* PERMET D'OUVRIR OU FERMER LA MODAL
 */
-  handleOpen = () => this.setState({ modalOpen: true })
-  /**
-   * PERMET DE FERMER LA MODAL
-   */
-  handleClose = () => this.setState({ modalOpen: false })
-
+  toggleModal = () => this.setState({ modalOpen: !this.state.modalOpen })
 
     render(){
         if(this.state.isLoading){
             return <div>
-              <Head location="/users" handleOpen={this.handleOpen} />
+              <Head location="/users" handleOpen={this.toggleModal} />
               <Loader active={true} />
             </div>
         }else{
             return (
                 <div>
-                <Head location="/users" handleOpen={this.handleOpen}  />
+                <Head location="/users" handleOpen={this.toggleModal}  />
                     <div className="ui container">
                     <br />
                     <br />
@@ -205,7 +200,7 @@ class User extends Component {
                  }}
                     />
                   </Fade>
-                 <ModalLogout modalOpen={this.state.modalOpen} onClose={this.handleClose} />
+                 <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
                     </div>
                 </div>
             )
