@@ -29,8 +29,7 @@ const RowInstance = (props) =>{
                           le chef de centre est M. <b>{item.responsable}</b>.
                         </div>
                           <div className="footer">
-                            Contact: {item.phone_number[0]}{" "}
-                            {item.phone_number[1] && "- " + item.phone_number[1]}
+                            Contact: {item.phone_number.join('-')}
                           </div>
                         </div>
                         <div className="extra content">
