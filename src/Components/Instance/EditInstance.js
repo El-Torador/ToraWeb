@@ -49,12 +49,8 @@ class EditInstance extends Component {
     /**
    * PERMET D'OUVRIR LA MODAL
    */
-    handleOpen = () => this.setState({ modalOpen: true })
-    /**
-     * PERMET DE FERMER LA MODAL
-     */
-    handleClose = () => this.setState({ modalOpen: false })
-
+    toggleModal = () => this.setState({ modalOpen: !this.state.modalOpen })
+  
     /**
      * PERMET DE SOUMMETTRE LES DONNEES
      * @param { Event } e
@@ -91,14 +87,14 @@ class EditInstance extends Component {
         const { instance } = this.state
         if(this.state.isLoading){
             return <div>
-            <Head location="/instance" handleOpen={this.handleOpen}  />
+            <Head location="/instance" handleOpen={this.toggleModal}  />
               <Loader active={true} />
             </div>
         }else{
             if(instance.name && instance.city && instance.address && instance.responsable && instance.phone_number){
               return (
                 <div>
-                  <Head location="/instance" handleOpen={this.handleOpen} />
+                  <Head location="/instance" handleOpen={this.toggleModal} />
                   <div className="ui container">
                     <br />
                     <br />
@@ -225,14 +221,14 @@ class EditInstance extends Component {
                   </div>
                   <ModalLogout
                     modalOpen={this.state.modalOpen}
-                    onClose={this.handleClose}
+                    onClose={this.toggleModal}
                   />
                 </div>
               );
             }else{
               return (
                 <div>
-                  <Head location="/instance" handleOpen={this.handleOpen} />
+                  <Head location="/instance" handleOpen={this.toggleModal} />
                   <br />
                   <div className="ui container">
                     <br />
