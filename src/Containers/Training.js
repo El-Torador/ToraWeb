@@ -9,6 +9,9 @@ import quali from '../assets/images/index5.jpg'
 import Fade from 'react-reveal/Fade'
 import './Training.css'
 
+/**
+ * TRAINING CONTAINER
+ */
 class Training extends Component {
   constructor(props) {
     super(props);
@@ -17,24 +20,22 @@ class Training extends Component {
     };
   }
   /**
-   * OPEN THE MODAL LOGOUT
+   * OPEN OR CLOSE THE MODAL LOGOUT
    */
-  handleOpen = () => this.setState({ modalOpen: true });
-
-  handleClose = () => this.setState({ modalOpen: false });
+  toggleModal = () => this.setState({ modalOpen: !this.state.modalOpen });
 
   render() {
     if (this.state.isLoading) {
       return (
         <div>
-          <Head location="/formation" handleOpen={this.handleOpen} />
+          <Head location="/formation" handleOpen={this.toggleModal} />
           <Loader active={true} />
         </div>
       );
     } else {
       return (
         <div>
-          <Head location="/formation" handleOpen={this.handleOpen} />
+          <Head location="/formation" handleOpen={this.toggleModal} />
           <Fade right>
             <img
               src={formation}
@@ -70,7 +71,7 @@ class Training extends Component {
                 </div>
             </Fade>
           </div>
-          <ModalLogout modalOpen={this.state.modalOpen} onClose={this.handleClose}/>
+          <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal}/>
         </div>
       );
     }
