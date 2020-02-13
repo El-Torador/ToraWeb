@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import moment from 'moment'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
-import { Modal, Icon, Button, Header } from 'semantic-ui-react'
+import { Modal, Icon, Button, Header, Dimmer, Segment, Loader } from 'semantic-ui-react'
 import { addInstance } from '../../Controllers/instances/CRUD_instance'
 import {
     DateInput
@@ -104,7 +104,11 @@ class AddInstance extends Component{
             >
                 <Header icon="plus" content="Ajouter une instance" />
                 <Modal.Content>
-                    <form className="ui form" onSubmit={this.postInstance}>
+                    <Dimmer.Dimmable as={Segment} active={this.state.isLoading}>
+                        <Dimmer active={this.state.isLoading} inverted>
+                            <Loader>Chargement</Loader>
+                        </Dimmer>
+                        <form className="ui form" onSubmit={this.postInstance}>
                         <div className="field">
                             <div className="ui left icon input">
                                 <i className="icon globe"></i>
@@ -147,7 +151,7 @@ class AddInstance extends Component{
                                 required
                             />
                         </div>
-                        <Button color="yellow" inverted type="submit" loading={this.state.isLoading} disabled={this.state.isLoading}>
+                        <Button color="yellow" inverted type="submit" disabled={this.state.isLoading}>
                             <Icon name="checkmark" /> Ajouter
                       </Button>
                         <Button
@@ -159,6 +163,8 @@ class AddInstance extends Component{
                       </Button>
 
                     </form>
+                    </Dimmer.Dimmable>
+
                 </Modal.Content>
             </Modal>
         )
