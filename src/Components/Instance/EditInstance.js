@@ -62,7 +62,7 @@ class EditInstance extends Component {
     handleSubmit = (e) => {
       e.preventDefault()
       console.log(e.target)
-      
+      this.setState({loading: true})
       const newInstance = {
           name: e.target[0].value.toUpperCase(),
           city: e.target[1].value,
@@ -73,10 +73,14 @@ class EditInstance extends Component {
         }
       editInstance(newInstance, this.instaceId)
       .then((message)=>{
-        window.localStorage.setItem('flash', message)
-        this.props.history.push('/instance')
+        this.setState({ loading: false }, ()=>{
+          window.localStorage.setItem('flash', message)
+          this.props.history.push('/instance')
+        })
+       
       })
       .catch((err)=>{
+        this.setState({loading: false})
         console.log(err)
       })
       
