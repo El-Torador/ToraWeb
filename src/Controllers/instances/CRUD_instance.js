@@ -58,7 +58,8 @@ export const addInstance = options => {
                     reject(err)
                 })
         } else {
-            reject('Vos paramètres ne sont pas complet.')
+            const error = new Error('Vos paramètres ne sont pas complet.')
+            reject(error)
         }
     })
 }
@@ -85,7 +86,8 @@ export const editInstance = (options, id) => {
                     reject(err)
                 })
         } else {
-            reject('Vos paramètres ne sont pas complet.')
+            const error = new Error('Vos paramètres ne sont pas complet.')
+            reject(error)
         }
     })
 }
