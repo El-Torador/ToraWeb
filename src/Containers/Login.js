@@ -66,6 +66,8 @@ class Login extends Component {
                           <input
                             type="text"
                             name="username"
+                            pattern="[a-zA-Z0-9]{2,}"
+                            title="Username"
                             placeholder="Username"
                             className="rounded"
                             autoComplete="off"
@@ -79,6 +81,8 @@ class Login extends Component {
                           <input
                             type="password"
                             name="password"
+                            pattern="[a-zA-Z0-9]{7,}"
+                            title="Password"
                             placeholder="Password"
                             className="rounded"
                             autoComplete="off"
