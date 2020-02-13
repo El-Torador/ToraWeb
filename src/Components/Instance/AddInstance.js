@@ -104,7 +104,7 @@ class AddInstance extends Component{
             >
                 <Header icon="plus" content="Ajouter une instance" />
                 <Modal.Content>
-                    <Dimmer.Dimmable as={Segment} active={this.state.isLoading}>
+                    <Dimmer.Dimmable as={Segment} dimmed={this.state.isLoading}>
                         <Dimmer active={this.state.isLoading} inverted>
                             <Loader>Chargement</Loader>
                         </Dimmer>
