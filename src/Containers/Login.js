@@ -38,10 +38,11 @@ class Login extends Component {
     render() {
         if(this.state.isLoading){
             return <div className="ui container">
-              <Loader active={true} size="big"/>
-              <div className="ption">
-                Lancement de IAI-Learnship...
-              </div>
+              <Loader active={true} size="big" >
+                <div className="ption">
+                  Lancement de IAI-Learnship...
+                </div>
+              </Loader>
             </div>
         }else{
           return (
