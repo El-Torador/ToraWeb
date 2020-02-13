@@ -48,7 +48,8 @@ export const addUser = options =>{
                 reject(err)
             })
         }else{
-            reject('Vos paramètres ne sont pas complet.')
+            const error = new Error('Vos paramètres ne sont pas complet.')
+            reject(error)
         }
     })
 }
@@ -83,7 +84,8 @@ export const editUser = (options, id) =>{
                 reject(err)
             })
         }else{
-            reject('Vos paramètres ne sont pas complet.')
+             const error = new Error('Vos paramètres ne sont pas complet.')
+             reject(error)
         }
     })
 }
