@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Loader } from 'semantic-ui-react'
 import Head from '../Components/Header/Header'
 
+/**
+ * CERTIFIANT CONTAINER
+ */
 class Certifiant extends Component {
     constructor(props)
     {
