@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Loader } from 'semantic-ui-react'
 import Head from '../Components/Header/Header'
+
+/**
+ * QUALIFIANT CONTAINER
+ */
 class Qualifiant extends Component {
     constructor(props)
     {
