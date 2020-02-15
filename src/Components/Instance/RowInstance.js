@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import FilterResults from 'react-filter-search'
 import Fade from 'react-reveal/Fade'
 import PropTypes from 'prop-types'
-
+import ShowDetails from './ShowDetails'
 /**
  * LIST INSTANCE COMPONENT (<ROWINSTANCE/>)
  */
@@ -29,7 +29,7 @@ const RowInstance = (props) =>{
                           le chef de centre est M. <b>{item.responsable}</b>.
                         </div>
                           <div className="footer">
-                            Contact: {item.phone_number.join('-')}
+                              &copy; IAI-CAMEROUN
                           </div>
                         </div>
                         <div className="extra content">
@@ -39,13 +39,12 @@ const RowInstance = (props) =>{
                             </Link>
                           </span>
                           <span className="right floated star">
-                            <Link title="Voir" to={"/instance/show/" + item.id}>
-                              <i className="icon eye blue large"></i>
-                            </Link>
+                            <ShowDetails trigger={<i className="icon eye blue large" id={"show_" + item.id} title="Détails"></i>} instance={item} />
                           </span>
                         </div>
                       </div>
                     </div>
+                    
                   </Fade>
                 ));
               }}
