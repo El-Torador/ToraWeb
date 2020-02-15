@@ -7,6 +7,8 @@ import EditInstance from '../Components/Instance/EditInstance'
 import Training from '../Containers/Training'
 import Certifiant from '../Containers/Certifiant'
 import Qualifiant from '../Containers/Qualifiant'
+import Learner from '../Containers/Learner'
+import Former from '../Containers/Former'
 
 /**
  * ROUTER COMPONENT
@@ -22,6 +24,9 @@ class AppRouter extends Component{
             <Route path="/formation/certifiante" component={Certifiant} />
             <Route path="/formation/qualifiante" component={Qualifiant} />
             <Route path="/formation" component={Training} />
+            <Route path="/apprenant" component={Learner} />
+            <Route path="/formateur" component={Former} />
+            
           </Switch>
         );
     }
