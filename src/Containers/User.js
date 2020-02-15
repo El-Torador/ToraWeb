@@ -99,10 +99,15 @@ class User extends Component {
 
     render(){
         if(this.state.isLoading){
-            return <div>
+            return (
+            <div>
               <Head location="/users" handleOpen={this.toggleModal} />
               <Loader active={true} />
-            </div>
+              <br />
+              <div className="ui container">
+                  <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
+              </div>
+            </div>)
         }else{
             return (
                 <div>
