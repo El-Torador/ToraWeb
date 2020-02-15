@@ -6,6 +6,10 @@ import './Login.css'
 import { Loader } from 'semantic-ui-react'
 import Fade from 'react-reveal/Fade'
 import image from '../assets/images/iai.png'
+
+/**
+ * LOGIN CONTAINER
+ */
 class Login extends Component {
     constructor(props) {
         super(props)
