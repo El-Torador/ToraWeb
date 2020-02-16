@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Loader } from 'semantic-ui-react'
 import Head from '../Components/Header/Header'
 import ModalLogout from '../Components/Sections/ModalLogout'
-
+import './Discipline.css'
 /**
  * DISCIPLINE CONTAINER
  */
@@ -24,7 +24,14 @@ class Discipline extends Component {
             return (
                 <div>
                     <Head location="/formation" handleOpen={this.toggleModal} />
-                    <Loader active={true} />
+                    <br />
+                    <div className="ui container padding">
+                        <h1>
+                            <i className="icon"></i> Gestion des Disciplines
+                        </h1>
+                        <Loader active={true} />
+                    </div>
+                    <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
                 </div>
             )
         }else{
@@ -32,7 +39,7 @@ class Discipline extends Component {
                 <div>
                     <Head location="/formation" handleOpen={this.handleOpen} />
                     <br />
-                    <div className="ui container">
+                    <div className="ui container padding">
                         <br />
                         <br />
                         <h1>
