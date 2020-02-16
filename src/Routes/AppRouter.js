@@ -9,6 +9,7 @@ import Certifiant from '../Containers/Certifiant'
 import Qualifiant from '../Containers/Qualifiant'
 import Learner from '../Containers/Learner'
 import Former from '../Containers/Former'
+import EditLearner from '../Components/Learner/EditLearner'
 
 /**
  * ROUTER COMPONENT
@@ -18,14 +19,15 @@ class AppRouter extends Component{
         return (
           <Switch>
             <Route exact path="/" component={Login} />
+            <Route path="/learner/edit/:id" component={EditLearner} />
             <Route path="/instance/edit/:id" component={EditInstance} />
             <Route path="/instance" component={Instance} />
             <Route path="/users" component={User} />
-            <Route path="/formation/certifiante" component={Certifiant} />
-            <Route path="/formation/qualifiante" component={Qualifiant} />
-            <Route path="/formation" component={Training} />
-            <Route path="/apprenant" component={Learner} />
-            <Route path="/formateur" component={Former} />
+            <Route path="/training/certifying" component={Certifiant} />
+            <Route path="/training/qualifying" component={Qualifiant} />
+            <Route path="/training" component={Training} />
+            <Route path="/learner" component={Learner} />
+            <Route path="/former" component={Former} />
             
           </Switch>
         );
