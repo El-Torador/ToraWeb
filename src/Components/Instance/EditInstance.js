@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getInstanceById, editInstance } from '../../Controllers/instances/CRUD_instance'
 import Head from '../Header/Header'
+import { toast } from 'react-toastify'
 import { Loader, Button, Icon, Dimmer, Segment } from 'semantic-ui-react'
 import ModalLogout from '../Sections/ModalLogout'
 import { Link } from 'react-router-dom'
@@ -15,12 +16,13 @@ import {
 class EditInstance extends Component {
     constructor(props){
         super(props)
+        toast.configure()
         this.state ={
             instance: {},
             isLoading: true,
             loading: false,
             modalOpen:false,
-            date: null
+            date: ""
         }
         this.instaceId = this.props.match.params.id
     }
@@ -29,12 +31,11 @@ class EditInstance extends Component {
         getInstanceById(this.instaceId)
         .then((instance)=>{
             if(instance){
-                this.setState({instance, isLoading: false, date: moment(instance.created_at).format("DD/MM/YYYY")})
+                this.setState({instance, isLoading: false, date: moment(instance.date_of_inauguration).format("DD/MM/YYYY")})
             }else{
                 alert('Not found !')
             }
         }).catch((err)=>{
-            console.log(err)
             this.setState({isLoading: false})
         })
     }
@@ -57,15 +58,16 @@ class EditInstance extends Component {
      */
     handleSubmit = (e) => {
       e.preventDefault()
-      console.log(e.target)
       this.setState({loading: true})
+      let date = this.state.date.split('-')
+      const inauguration = `${date[2]}/${date[1]}/${date[0]}T00:00:00+00:00`
       const newInstance = {
           name: e.target[0].value.toUpperCase(),
           city: e.target[1].value,
           address: e.target[2].value,
           responsable: e.target[3].value,
           phone_number: e.target[4].value.split('-'),
-          inauguration: this.state.date
+          inauguration
         }
       editInstance(newInstance, this.instaceId)
       .then((message)=>{
@@ -76,8 +78,7 @@ class EditInstance extends Component {
        
       })
       .catch((err)=>{
-        this.setState({loading: false})
-        console.log(err)
+        this.setState({loading: false}, ()=>toast.error('❌'+err.message, {position: 'bottom-left', hideProgressBar: true}))
       })
       
 
