@@ -39,24 +39,24 @@ const Head = (props) =>{
           />
           <Menu.Item
             as={Link}
-            to="/apprenant"
+            to="/learner"
             icon="student"
             title="Gestion des apprenants"
-            active={props.location === "/apprenant" ? true : false}
+            active={props.location === "/learner" ? true : false}
           />
           <Menu.Item
             as={Link}
-            to="/formateur"
+            to="/former"
             icon="user secret"
             title="Gestion des formateurs"
-            active={props.location === "/formateur" ? true : false}
+            active={props.location === "/former" ? true : false}
           />
           <Menu.Item
             as={Link}
-            to="/formation"
+            to="/training"
             icon="wpforms"
             title="Gestion des formations"
-            active={props.location === "/formation" ? true : false}
+            active={props.location === "/training" ? true : false}
           />
           <Menu.Menu position="right">
             <Menu.Item
