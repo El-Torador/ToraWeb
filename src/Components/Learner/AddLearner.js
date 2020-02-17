@@ -80,7 +80,7 @@ class AddLearner extends Component {
                             err.message && toast.error('❌ ' + err.message, { position: 'bottom-left', hideProgressBar: true })
                         })
                     })
-            },1000)
+            },300)
         
     }
 
@@ -136,7 +136,6 @@ class AddLearner extends Component {
                                     <select className="ui fluid dropbox" placeholder="Statut matrimonial" title="Statut matrimonial">
                                         <option value="Célibataire">Célibataire</option>
                                         <option value="Marié(e)">Marié(e)</option>
-                                    <option value="En couple">En couple</option>
                                         <option value="Veuve">Veuve</option>
                                     </select>
                             </div>
