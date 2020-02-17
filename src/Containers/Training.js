@@ -28,14 +28,14 @@ class Training extends Component {
     if (this.state.isLoading) {
       return (
         <div>
-          <Head location="/formation" handleOpen={this.toggleModal} />
+          <Head location="/training" handleOpen={this.toggleModal} />
           <Loader active={true} />
         </div>
       );
     } else {
       return (
         <div>
-          <Head location="/formation" handleOpen={this.toggleModal} />
+          <Head location="/training" handleOpen={this.toggleModal} />
           <Fade right>
             <img
               src={formation}
@@ -50,7 +50,7 @@ class Training extends Component {
             <Fade bottom>
                 <div className="ui two cards">
                     <Link
-                    to="/formation/certifiante"
+                  to="/training/certifying"
                     className="yellow card lg jord"
                     >
                     <span className="ui yellow ribbon label">FORMATION CERTIFIANTE</span>
@@ -60,7 +60,7 @@ class Training extends Component {
                         title="Formation certifiante"
                     />
                     </Link>
-                    <Link to="/formation/qualifiante" className="blue card lg jor">
+                <Link to="/training/qualifying" className="blue card lg jor">
                   <span className="ui blue ribbon label">FORMATION QUALIFIANTE</span>
                     <img
                         src={quali}
