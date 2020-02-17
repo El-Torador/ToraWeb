@@ -12,7 +12,6 @@ export const getUsers = ()=>{
            resolve(users.data)
         })
         .catch((err) => {
-            console.error(err)
             reject(err)
         }) 
    })
@@ -31,7 +30,7 @@ export const getUsers = ()=>{
  */
 export const addUser = options =>{
     return new Promise((resolve, reject)=>{
-        if (options.username && options.password && options.roles && options.is_lock && options.instance_id) {
+        if (options.username !== undefined && options.password !== undefined && options.roles !== undefined && options.is_lock !== undefined && options.instance_id !== undefined) {
             const payload = {}
             payload.username = options.username
             payload.password = options.password
@@ -39,7 +38,6 @@ export const addUser = options =>{
             payload.is_lock = options.is_lock
             payload.instance_id = Number(options.instance_id)
             payload.api_key = types.API_KEY_USERS
-            console.log(payload)
             axios.post(types.END_POINT+'/users/add', payload, types.config)
             .then((message)=>{
                 resolve(message.data)
@@ -67,7 +65,7 @@ export const addUser = options =>{
  */
 export const editUser = (options, id) =>{
      return new Promise((resolve, reject)=>{
-         if (options.username && options.password && options.roles && options.is_lock && options.instance_id) {
+         if (options.username !== undefined && options.password !== undefined && options.roles !== undefined && options.is_lock !== undefined && options.instance_id !== undefined) {
             const payload = {}
             payload.username = options.username
             payload.password = options.password
@@ -75,7 +73,6 @@ export const editUser = (options, id) =>{
             payload.is_lock = options.is_lock
             payload.instance_id = Number(options.instance_id)
             payload.api_key = types.API_KEY_USERS
-            console.log(id)
             axios.put(types.END_POINT+'/users/update/'+Number(id), payload)
             .then((message)=>{
                 resolve(message.data)
@@ -97,7 +94,7 @@ export const editUser = (options, id) =>{
  */
 export const deleteUser = id =>{
     return new Promise((resolve, reject)=>{
-        axios.delete(types.END_POINT+'/users/delete/'+id, {api_key: types.API_KEY_USERS}, types.config)
+        axios.put(types.END_POINT+'/users/delete/'+id, {api_key: types.API_KEY_USERS}, types.config)
         .then((message)=>{
             resolve(message.data)
         })
