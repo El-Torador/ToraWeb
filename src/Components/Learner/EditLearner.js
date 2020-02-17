@@ -26,25 +26,29 @@ class EditLearner extends Component {
             modalOpen: false,
             date: ""
         }
-        this.learnerId = this.props.match.params.id
+        this.learnerId = Number(this.props.match.params.id)
     }
 
     componentDidMount() {
-        getLearnerById(this.learnerId)
-            .then((learner) => {
-                if (learner) {
-                    getInstance()
-                        .then((instances) => {
-                            if (instances) {
-                                this.setState({ instances, learner, isLoading: false, date: moment(learner.birth_date).format("DD/MM/YYYY") })
-                            }
-                        })
-                } else {
-                    toast.warn('⚠️ La ressource n\'existe pas.', {position: 'bottom-left', hideProgressBar: true})
-                }
-            }).catch((err) => {
-                this.setState({ isLoading: false }, ()=>toast.error('❌'+err.message, {position: 'bottom-left', hideProgressBar: true}))
-            })
+        if(this.learnerId){
+            getLearnerById(this.learnerId)
+                .then((learner) => {
+                    if (learner) {
+                        getInstance()
+                            .then((instances) => {
+                                if (instances) {
+                                    this.setState({ instances, learner, isLoading: false, date: moment(learner.birth_date).format("DD-MM-YYYY") })
+                                }
+                            })
+                    } else {
+                        toast.warn('⚠️ La ressource n\'existe pas.', { position: 'bottom-left', hideProgressBar: true })
+                    }
+                }).catch((err) => {
+                    this.setState({ isLoading: false }, () => toast.error('❌' + err.message, { position: 'bottom-left', hideProgressBar: true }))
+                })
+        }else{
+            toast.error('❌404❌ Cette ressource n\'existe pas. ', {position: 'bottom-left', hideProgressBar:true, onClose: ()=>this.props.history.push('/learner')})
+        }
     }
     /**
      * PERMET DE CHANGER LA DATE
@@ -66,15 +70,7 @@ class EditLearner extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.setState({ loading: true })
-        let date = []
-        if(this.state.date.lentgh > 0){
-            date = this.state.date.split('-')
-        }
-        else{
-        date = moment(this.state.learner.birth_date).format("DD/MM/YYYY")
-        }
-        console.log(date)
-        date = date.split('/')
+        let date = this.state.date.split('-')
         const birth_date = `${date[2]}-${date[1]}-${date[0]}T00:00:00+00:00`
         const newLearner = {
             first_name: e.target[0].value.toUpperCase(),
@@ -91,8 +87,8 @@ class EditLearner extends Component {
             avatar: e.target[0].value.toLowerCase() + '.jpg',
             employer: "JFMLabs"
         }
-        console.log(newLearner)
-        editLearner(newLearner, this.learnerId)
+        setTimeout(()=>{
+            editLearner(newLearner, this.learnerId)
             .then((message) => {
                 this.setState({ loading: false }, () => {
                     window.localStorage.setItem('flash', message)
@@ -103,6 +99,7 @@ class EditLearner extends Component {
             .catch((err) => {
                 this.setState({ loading: false }, () => toast.error('❌' + err.message, { position: 'bottom-left', hideProgressBar: true }))
             })
+        }, 300)
 
 
     }
@@ -169,7 +166,6 @@ class EditLearner extends Component {
                                             <select className="ui fluid dropbox" placeholder="Statut matrimonial" title="Statut matrimonial">
                                                 <option value="Célibataire" selected={learner.marital_status === "Célibataire" && true}>Célibataire</option>
                                                 <option value="Marié(e)" selected={learner.marital_status === "Marié(e)" && true}>Marié(e)</option>
-                                                <option value="En couple" selected={learner.marital_status === "En couple" && TextTrackCueList}>En couple</option>
                                                 <option value="Veuve" selected={learner.marital_status === "Veuve" && true}>Veuve</option>
                                             </select>
                                         </div>
