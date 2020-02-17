@@ -11,7 +11,6 @@ export const getInstance = () => {
                 resolve(instance.data)
             })
             .catch((err) => {
-                //console.error(err)
                 reject(err)
             })
     })
@@ -32,7 +31,6 @@ export const getInstanceById = (id) =>{
             resolve(instance.data)
         })
         .catch((err)=>{
-            console.log(err)
             reject(err)
         })
     })
@@ -50,9 +48,10 @@ export const getInstanceById = (id) =>{
 export const addInstance = options => {
     return new Promise((resolve, reject) => {
         if (options.name && options.city && options.address && options.responsable && options.phone_number) {
+            options.api_key = types.API_KEY_INSTANCE
             axios.post(types.END_POINT + '/instance/add', options, types.config)
-                .then((phone) => {
-                    resolve(phone)
+                .then((message) => {
+                    resolve(message.data.message)
                 })
                 .catch((err) => {
                     reject(err)
@@ -65,12 +64,12 @@ export const addInstance = options => {
 }
 
 /**
- * PUT phone
+ * PUT INSTANCE
  * @param {object} options
  * @param {string} options.name
  * @param {string} options.city
  * @param {string} options.address
- * @param {boolean} options.responsable
+ * @param {string} options.responsable
  * @param {number} options.phone_number 
  * @param {number} id 
  * @return Promise
@@ -78,9 +77,10 @@ export const addInstance = options => {
 export const editInstance = (options, id) => {
     return new Promise((resolve, reject) => {
         if (options.name && options.city && options.address && options.responsable && options.phone_number) {
-            axios.put(types.END_POINT + '/phone/' + id, options, types.config)
-                .then((result) => {
-                    resolve(result)
+            options.api_key = types.API_KEY_INSTANCE
+            axios.put(types.END_POINT + '/instance/update/' + id, options, types.config)
+                .then((message) => {
+                    resolve(message.data.message)
                 })
                 .catch((err) => {
                     reject(err)
