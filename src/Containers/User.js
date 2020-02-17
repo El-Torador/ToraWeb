@@ -7,7 +7,7 @@ import Head from '../Components/Header/Header'
 import Fade from 'react-reveal/Fade'
 import { getUsers, addUser, editUser, deleteUser } from '../Controllers/users/CRUD_users'
 import { getInstance } from '../Controllers/instances/CRUD_instance'
-
+import './User.css'
 /**
  * USER CONTAINER
  */
@@ -38,8 +38,7 @@ class User extends Component {
             }},
             {title: 'Instance', field: 'instance_id',
             lookup:{
-                1: 'IAI-Bafoussam',
-                2: 'IAI-Douala'
+                
             }},
             {title: 'Date de création', field: 'created_at', type: 'date'}
         ]
@@ -54,7 +53,7 @@ class User extends Component {
                 if(data){
                   getInstance().then((instances) => {
                     if(instances){
-                      instances.map((item) => this.columns[5].lookup[item.id] = item.name)
+                      instances.map((item) => this.columns[5].lookup[item.id] = item.name+"("+item.city+")")
                       this.setState({ data, isLoading: false })
                     }else{
                       toast.info('ℹ️ Aucune instance enregistré, Veuillez Ajouter une instance avant de continuer.', {
@@ -74,10 +73,36 @@ class User extends Component {
                     console.log(err)
                   })
                 }else{
-                  toast.info('ℹ️ Pas d\'utilisateur enregistré.', {
-                    position: 'bottom-left',
-                    hideProgressBar: true
+                  getInstance().then((instances) => {
+                    if (instances) {
+                      instances.map((item) => this.columns[5].lookup[item.id] = item.name)
+                      this.setState({ data, isLoading: false })
+                      toast.info('ℹ️ Pas d\'utilisateur enregistré.', {
+                        position: 'bottom-left',
+                        hideProgressBar: true
+                      })
+                    } else {
+                      toast.info('ℹ️ Pas d\'utilisateur enregistré.', {
+                        position: 'bottom-left',
+                        hideProgressBar: true
+                      })
+                      toast.info('ℹ️ Aucune instance enregistré, Veuillez Ajouter une instance avant de continuer.', {
+                        position: 'bottom-left',
+                        hideProgressBar: true,
+                        onClose: () => {
+                          this.props.history.push('/instance')
+                        }
+                      })
+                    }
+                  }).catch((err) => {
+                    console.log(err)
+                    this.setState({ isLoading: false }, () => toast.error('❌' + err.message, {
+                      position: 'bottom-left',
+                      hideProgressBar: true
+                    }))
+                    console.log(err)
                   })
+                  
                 }
             })
             .catch((err)=>{
@@ -99,20 +124,31 @@ class User extends Component {
 
     render(){
         if(this.state.isLoading){
-            return <div>
+            return (
+            <div>
               <Head location="/users" handleOpen={this.toggleModal} />
-              <Loader active={true} />
-            </div>
+              <div className="ui container padding">
+                  <h1>
+                    <i className='icon users large'></i>Gestion des Utilisateurs
+                    </h1>
+                  <br />
+                  <Loader active={true} />
+                  <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
+              </div>
+            </div>)
         }else{
             return (
                 <div>
                 <Head location="/users" handleOpen={this.toggleModal}  />
-                    <div className="ui container">
-                    <br />
-                    <br />
+                    <div className="ui container padding">
+                    <h1>
+                      <i className='icon users large'></i>Gestion des Utilisateurs
+                    </h1>
+                  <br />
+
                     <Fade right>
                         <MaterialTable
-                        title="Gestion des utilisateurs"
+                        title="Utilisateurs de IAI-LEARNSHIP"
                         columns={this.columns}
                         data={this.state.data}
                         options={{
@@ -132,20 +168,38 @@ class User extends Component {
                    onRowAdd: newData =>
                      new Promise((resolve, reject) => {
                        setTimeout(() => {
-                         const data = [...this.state.data];
-                         data.push(newData);
+                         const data = this.state.data.lentgh > 0 ?  [...this.state.data] : [];
+                         
                          addUser(newData)
                            .then(message => {
-                             this.setState({ data }, () => {
-                               toast.success('✔️'+message.message, {
-                                    position: toast.POSITION.BOTTOM_LEFT,
-                                    hideProgressBar: true
+                            getUsers()
+                            .then((users)=>{
+                              const us = users.filter((item)=>item.username === newData.username)
+                              console.log(us)
+                              newData.id = us[0].id
+                              data.push(newData)
+                              this.setState({ data }, () => {
+                                toast.success('✔️' + message.message, {
+                                  position: toast.POSITION.BOTTOM_LEFT,
+                                  hideProgressBar: true
                                 });
-                               resolve();
-                             });
+                                resolve();
+                              });
+                            })
+                              .catch((err) => {
+                                console.log(err)
+                                this.setState({ isLoading: false }, () => toast.error('❌' + err.message, {
+                                  position: 'bottom-left',
+                                  hideProgressBar: true
+                                }))
+                                console.log(err)
+                              })
                            })
                            .catch(err => {
-                             console.log(err)
+                             toast.warn(err.message ? '⚠️' + err.message : '⚠️' +err, {
+                               position: toast.POSITION.BOTTOM_LEFT,
+                               hideProgressBar: true
+                             });
                              reject()
                              });
                        }, 600);
@@ -155,13 +209,12 @@ class User extends Component {
                        setTimeout(() => {
                          const data = [...this.state.data];
                          data[oldData.tableData.id] = newData
-                         console.log(newData)
                          editUser(newData, oldData.id)
                            .then(message => {
-                             console.log('TOTO BIEN')
+                             console.log('✔️')
                              data.password = ''
                              this.setState({ data }, () => {
-                               toast.success(message.message, {
+                               toast.success('✔️'+message.message, {
                                 position: toast.POSITION.BOTTOM_LEFT,
                                 hideProgressBar:true
                             });
@@ -169,22 +222,25 @@ class User extends Component {
                              });
                            })
                            .catch(err => {
-                            console.log(err)
+                             toast.warn(err.message ? '⚠️' + err.message : '⚠️' +err, {
+                               position: toast.POSITION.BOTTOM_LEFT,
+                               hideProgressBar: true
+                             });
                             reject()
                              
                            });
                        }, 200);
                      }),
                    onRowDelete: oldData =>
-                     new Promise(resolve => {
+                     new Promise((resolve,reject) => {
                        setTimeout(() => {
                          resolve();
                          const data = [...this.state.data];
                          deleteUser(data[oldData.tableData.id].id)
-                           .then(users => {
+                           .then(message => {
                              data.splice(data.indexOf(oldData), 1);
                              this.setState({ data }, () =>{ 
-                                 toast.success(users.data.message, {
+                                 toast.success(message.message, {
                                     position: toast.POSITION.BOTTOM_LEFT,
                                     hideProgressBar: true
                                 });
@@ -192,7 +248,11 @@ class User extends Component {
                                 });
                            })
                            .catch(err =>{
-                               alert(err)
+                             toast.warn(err.message ? '⚠️' + err.message : '⚠️' +err, {
+                               position: toast.POSITION.BOTTOM_LEFT,
+                               hideProgressBar: true
+                             });
+                             reject();
                       
                            } );
                        }, 600);
