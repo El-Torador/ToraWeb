@@ -15,7 +15,7 @@ class AddInstance extends Component{
     constructor(props){
         super(props)
         this.state = {
-            date: null,
+            date: "",
             isLoading: false
         }
     }
@@ -38,7 +38,7 @@ class AddInstance extends Component{
         e.preventDefault()
         this.setState({isLoading: true})
         let date = this.state.date.split('-')
-        const inauguration = `${date[2]}/${date[1]}/${date[0]}`
+        const inauguration = `${date[2]}/${date[1]}/${date[0]}T00:00:00+00:00`
         const instance = {
             name: e.target[0].value.toUpperCase(),
             city: e.target[1].value,
@@ -47,7 +47,6 @@ class AddInstance extends Component{
             phone_number: e.target[4].value.split('-'),
             inauguration
         }
-        console.log(instance)
         setTimeout(()=>{
             
         if (instance.name) {
@@ -58,8 +57,8 @@ class AddInstance extends Component{
                             if (instance.inauguration) {
                                 addInstance(instance)
                                     .then((message) => {
-                                        const i = [...this.state.instance, instance]
-                                        this.setState({ instance: i, isLoading: false }, () => {
+                                        this.props.newInstance(instance)
+                                        this.setState({ isLoading: false }, () => {
                                             this.props.exit()
                                             toast.success('✔️' + message, { position: 'bottom-left', hideProgressBar: true })
                                         })
@@ -69,7 +68,6 @@ class AddInstance extends Component{
                                             this.props.exit()
                                             err.message && toast.error('❌ ' + err.message, { position: 'bottom-left', hideProgressBar: true })
                                         })
-                                        console.log(err)
                                     })
                             } else {
                                 toast.error('❌La date d\'inauguration est requise.', { position: 'bottom-left', hideProgressBar: true })
