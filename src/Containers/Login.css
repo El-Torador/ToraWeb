@@ -7,9 +7,8 @@
     width: 400px !important;
 }
 
-
-.image {
-    margin-top: 100px !important;
+.ui.grid {
+    padding-top: 9rem !important;
 }
 
 .column {
@@ -20,6 +19,6 @@
     height: 100%;
 }
 
-.ption{
+.ption {
     color: gray;
 }
