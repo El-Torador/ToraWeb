@@ -112,7 +112,7 @@ class EditLearner extends Component {
                 <Loader active={true} />
             </div>
         } else {
-            if ({...learner}) {
+            if (learner.first_name && learner.last_name && learner.birth_date && learner.sex && learner.marital_status && learner.instance_id && learner.email && learner.address && learner.phone_number) {
                 return (
                     <div>
                         <Head location="/learner" handleOpen={this.toggleModal} />
@@ -120,7 +120,7 @@ class EditLearner extends Component {
                             <br />
                             <br />
                             <h2 className="ui title">
-                                <i className="icon edit large"></i> Editer un apprenant
+                                <i className="icon edit large yellow"></i> Editer un apprenant
                             </h2>
                             <Dimmer.Dimmable as={Segment} dimmed={this.state.loading}>
                                 <Dimmer active={this.state.loading} inverted>
