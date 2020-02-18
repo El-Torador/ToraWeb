@@ -4,7 +4,7 @@ import Head from '../Components/Header/Header'
 import RowInstance from '../Components/Instance/RowInstance'
 import ModalLogout from '../Components/Sections/ModalLogout'
 import AddInstance from '../Components/Instance/AddInstance'
-import { Loader } from 'semantic-ui-react'
+import { Loader, Popup } from 'semantic-ui-react'
 import { getInstance } from "../Controllers/instances/CRUD_instance";
 import './Instance.css'
 import * as types from '../Constants/index'
@@ -88,30 +88,39 @@ class Instance extends Component {
                 <Head location="/instance" handleOpen={this.toggleModal} />
                 <div className="ui container padding">
                   <h1>
-                    <i className="icon globe large"></i>Gestion des Instances
+                    <i className="icon globe large yellow"></i>Gestion des Instances
                   </h1>
                   <br /> <br />
                   <div className="ui search">
                     <div className="ui left icon input">
                       <i className="icon search"></i>
-                      <input
-                        className="prompt"
-                        type="text"
-                        placeholder="Rechercher une instance..."
-                        onChange={this.handleChange}
+                      <Popup
+                        content="Rechercher une instance"
+                        trigger={
+                          <input
+                            className="prompt"
+                            type="text"
+                            placeholder="Rechercher une instance..."
+                            onChange={this.handleChange}
+                          />
+                        }
+                        position="left center"
                       />
                     </div>
                   </div>
                   <Loader active={true} />
                 </div>
                 <button
-                  className="circular ui icon disabled massive button is_fix"
+                  className="circular ui icon disabled yellow massive button is_fix"
                   title="Ajouter une instance"
                   onClick={this.toggleModalAddInstance}
                 >
                   <i className="icon plus"></i>
                 </button>
-                <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
+                <ModalLogout
+                  modalOpen={this.state.modalOpen}
+                  onClose={this.toggleModal}
+                />
               </div>
             );
         }else{
@@ -121,21 +130,22 @@ class Instance extends Component {
                 <br />
                 <div className="ui container padding">
                   <h1>
-                    <i className="icon globe large"></i>Gestion des Instances
+                    <i className="icon globe yellow large"></i>Gestion des Instances
                   </h1>
                   <br /> <br />
                   <div className="ui search">
                     <div className="ui left icon input">
                       <i className="icon search"></i>
-                      <input
+                      <Popup content="Rechercher une instance" trigger={<input
                         className="prompt"
                         type="text"
                         placeholder="Rechercher une instance..."
                         onChange={this.handleChange}
-                      />
+                      />} 
+                        position="left center"
+                       />
                     </div>
                   </div>
-                  <br />
                   <br />
                   <div className="ui grid">
                     <RowInstance
@@ -144,13 +154,14 @@ class Instance extends Component {
                     />
                   </div>
                 </div>
-                <button
-                  className="circular ui icon massive button is_fix"
-                  title="Ajouter une instance"
+                <Popup content="Ajouter une instance" trigger={<button
+                  className="circular ui icon massive button yellow is_fix"
                   onClick={this.toggleModalAddInstance}
                 >
                   <i className="icon plus"></i>
-                </button>
+                </button>}
+                  position="left center"
+                  />
                 <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
                 <AddInstance addInstance={this.state.addInstance} exit={this.toggleModalAddInstance} newInstance={this.newInstance} />
               </div>
