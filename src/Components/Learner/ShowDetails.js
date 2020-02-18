@@ -3,6 +3,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import avatar from '../../assets/images/avatar.png'
 import girl from '../../assets/images/girl.png'
+import { toast } from 'react-toastify'
 import { getInstanceById } from '../../Controllers/instances/CRUD_instance'
 import { Modal, Header, Image } from 'semantic-ui-react'
 
@@ -23,6 +24,9 @@ class ShowDetails extends Component {
                 this.setState({instance})
             }
         })
+        .catch((err)=>{
+            toast.error('❌'+err.message, {position: 'bottom-left', hideProgressBar:true})
+        })
     }
     render() {
         return (
@@ -31,7 +35,7 @@ class ShowDetails extends Component {
                     trigger={this.props.trigger}
                     closeIcon
                 >
-                    <Header icon='student' content={this.props.learner.first_name+" "+this.props.learner.last_name} />
+                    <Header icon='student yellow' content={this.props.learner.first_name+" "+this.props.learner.last_name} />
                     <Modal.Content image>
                         {this.props.learner.sex === "Masculin" ? <Image wrapper="true" size="large" src={avatar} /> : <Image wrapper="true" size="large" src={girl} />}
                         <Modal.Description>
