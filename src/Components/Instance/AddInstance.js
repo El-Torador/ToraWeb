@@ -100,7 +100,7 @@ class AddInstance extends Component{
                 open={this.props.addInstance}
                 size="large"
             >
-                <Header icon="plus" content="Ajouter une instance" />
+                <Header icon="plus yellow" content="Ajouter une instance" />
                 <Modal.Content>
                     <Dimmer.Dimmable as={Segment} dimmed={this.state.isLoading}>
                         <Dimmer active={this.state.isLoading} inverted>
