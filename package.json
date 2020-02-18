@@ -15,6 +15,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-app-polyfill": "^1.0.6",
+    "react-axiom": "^0.5.2",
     "react-dom": "^16.12.0",
     "react-filter-search": "^1.0.9",
     "react-reveal": "^1.2.2",
