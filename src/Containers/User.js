@@ -137,7 +137,7 @@ class User extends Component {
                 <Head location="/users" handleOpen={this.toggleModal}  />
                     <div className="ui container padding">
                     <h1>
-                      <i className='icon users large'></i>Gestion des Utilisateurs
+                      <i className='icon users large yellow'></i>Gestion des Utilisateurs
                     </h1>
                   <br />
 
