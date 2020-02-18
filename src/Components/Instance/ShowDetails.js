@@ -15,7 +15,7 @@ class ShowDetails extends Component {
                  trigger={this.props.trigger}
                  closeIcon
                 >
-                <Header icon='globe' content={this.props.instance.name} />
+                <Header icon='globe yellow' content={this.props.instance.name} />
                 <Modal.Content>
                     <Modal.Description>
                             <Divider horizontal>
