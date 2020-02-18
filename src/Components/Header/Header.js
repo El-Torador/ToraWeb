@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Button } from 'semantic-ui-react'
+import { Menu, Button, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './Header.css'
 import image from '../../assets/images/iai.png'
@@ -16,55 +16,48 @@ const Head = (props) =>{
             title="IAI-Learnship"
             children={<img src={image} alt="logo" width="90" height="30" />}
           />
-          <Menu.Item
+          <Popup content="Statistiques" trigger={<Menu.Item
             as={Link}
             to="/home"
-            icon="home"
-            title="Acceuil"
+            icon="chart line"
             active={props.location === "/home" ? true : false}
-          />
-          <Menu.Item
+          />} position="bottom center" />
+          <Popup content = "Gestion des utilisateurs" trigger={<Menu.Item
             as={Link}
             to="/users"
             icon="users"
-            title="Gestion des utilisateurs"
             active={props.location === "/users" ? true : false}
-          />
-          <Menu.Item
+          />} position="bottom center" />
+          <Popup content="Gestion des instances" trigger={<Menu.Item
             as={Link}
             to="/instance"
             icon="globe"
-            title="Gestion des instances"
             active={props.location === "/instance" ? true : false}
-          />
-          <Menu.Item
+          />} position="bottom center" />
+          <Popup content="Gestion des apprenants" trigger={<Menu.Item
             as={Link}
             to="/learner"
             icon="student"
-            title="Gestion des apprenants"
             active={props.location === "/learner" ? true : false}
-          />
-          <Menu.Item
+          />} position="bottom center" />
+          <Popup content="Gestion des formateurs" trigger={<Menu.Item
             as={Link}
             to="/former"
             icon="user secret"
-            title="Gestion des formateurs"
             active={props.location === "/former" ? true : false}
-          />
-          <Menu.Item
+          />} position="bottom center" />
+          <Popup content="Gestion des formations" trigger={<Menu.Item
             as={Link}
             to="/training"
             icon="wpforms"
-            title="Gestion des formations"
             active={props.location === "/training" ? true : false}
-          />
+          />} position="bottom center" />
           <Menu.Menu position="right">
-            <Menu.Item
-              title="Logout"
+            <Popup content="Se déconnecter" trigger={<Menu.Item
               icon="log out"
               onClick={props.handleOpen}
               as={Button}
-            />
+            />} position="right center" />
           </Menu.Menu>
         </Menu>
       </div>
