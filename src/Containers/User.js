@@ -244,7 +244,6 @@ class User extends Component {
                          data[oldData.tableData.id] = newData
                          editUser(newData, oldData.id)
                            .then(message => {
-                             setTimeout(() => { data.password = ''}, 200)
                              this.setState({ data }, () => {
                                toast.success('✔️'+message.message, {
                                 position: toast.POSITION.BOTTOM_LEFT,
