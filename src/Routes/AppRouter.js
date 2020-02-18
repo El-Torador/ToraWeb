@@ -10,7 +10,7 @@ import Qualifiant from '../Containers/Qualifiant'
 import Learner from '../Containers/Learner'
 import Former from '../Containers/Former'
 import EditLearner from '../Components/Learner/EditLearner'
-
+import Statistic from '../Containers/Statistic'
 /**
  * ROUTER COMPONENT
  */
@@ -28,6 +28,8 @@ class AppRouter extends Component{
             <Route path="/training" component={Training} />
             <Route path="/learner" component={Learner} />
             <Route path="/former" component={Former} />
+            <Route path="/home" component={Statistic} />
+            
             
           </Switch>
         );
