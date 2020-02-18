@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Popup } from 'semantic-ui-react'
 import FilterResults from 'react-filter-search'
 import Fade from 'react-reveal/Fade'
 import PropTypes from 'prop-types'
@@ -34,9 +35,11 @@ const RowInstance = (props) =>{
                         </div>
                         <div className="extra content">
                           <span className="left floated like">
-                            <Link title="Editer" to={"/instance/edit/" + item.id}>
+                            <Popup content="Editer" trigger={<Link title="Editer" to={"/instance/edit/" + item.id}>
                               <i className="icon pencil yellow large"></i>
-                            </Link>
+                            </Link>} 
+                              position="top center"
+                            />
                           </span>
                           <span className="right floated star">
                             <ShowDetails trigger={<i className="icon eye blue large" id={"show_" + item.id} title="Détails"></i>} instance={item} />
