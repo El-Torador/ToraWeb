@@ -65,12 +65,10 @@ class User extends Component {
                       })
                     }
                   }).catch((err) => {
-                    console.log(err)
                     this.setState({ isLoading: false }, () => toast.error('❌'+err.message, {
                       position: 'bottom-left',
                       hideProgressBar: true
                     }))
-                    console.log(err)
                   })
                 }else{
                   getInstance().then((instances) => {
@@ -95,18 +93,15 @@ class User extends Component {
                       })
                     }
                   }).catch((err) => {
-                    console.log(err)
                     this.setState({ isLoading: false }, () => toast.error('❌' + err.message, {
                       position: 'bottom-left',
                       hideProgressBar: true
                     }))
-                    console.log(err)
                   })
                   
                 }
             })
             .catch((err)=>{
-              console.log(err)
               this.setState({ isLoading: false }, () => toast.error('❌'+err.message, {
                 position: 'bottom-left',
                 hideProgressBar: true
@@ -151,7 +146,49 @@ class User extends Component {
                         title="Utilisateurs de IAI-LEARNSHIP"
                         columns={this.columns}
                         data={this.state.data}
+                        localization={{
+                          body:{
+                            emptyDataSourceMessage: 'Aucun utilisateur enregistré',
+                            addTooltip: 'Ajouter',
+                            deleteTooltip: 'Supprimer',
+                            editTooltip: 'Editer',
+                            editRow:{
+                              deleteText: 'Voulez-vous vraiment supprimer cet utilisateur ?',
+                              cancelTooltip: 'Annuler',
+                              saveTooltip: 'Enregistrer'
+                            }
+                          },
+                          grouping:{
+                            placeholder: 'Clisser et déposer les en-têtes pour grouper la recherche...'
+                          },
+                          header:{
+                            actions: 'Actions'
+                          },
+                          pagination:{
+                            labelDisplayedRows: '{from}-{to} sur {count}',
+                            firstArialLabel: 'Première Page',
+                            firstTooltip: 'Première Page',
+                            previousAriaLabel: 'Page Précédente',
+                            previousTooltip: 'Page Précédente',
+                            nextAriaLabel: 'Page Suivante',
+                            nextTooltip: 'Page Suivante',
+                            lastArialLabel: 'Dernière Page',
+                            lastTooltip: 'Dernière Page'
+                          },
+                          toolbar:{
+                            exportTitle: 'Exporter',
+                            exportAriaLabel: 'Exporter',
+                            exportName: 'Exporter en format CSV',
+                            searchPlaceholder: 'Rechercher',
+                            searchTooltip: 'Rechercher'
+                          }
+                        }}
                         options={{
+                          grouping: true,
+                          headerStyle: {
+                            backgroundColor: '#FFC961',
+                            color: '#FFF'
+                          },
                         rowStyle: rowData => ({
                             backgroundColor:
                             this.state.selectedRow &&
@@ -168,14 +205,12 @@ class User extends Component {
                    onRowAdd: newData =>
                      new Promise((resolve, reject) => {
                        setTimeout(() => {
-                         const data = this.state.data.lentgh > 0 ?  [...this.state.data] : [];
-                         
+                         const data = [...this.state.data]
                          addUser(newData)
                            .then(message => {
                             getUsers()
                             .then((users)=>{
                               const us = users.filter((item)=>item.username === newData.username)
-                              console.log(us)
                               newData.id = us[0].id
                               data.push(newData)
                               this.setState({ data }, () => {
@@ -187,12 +222,10 @@ class User extends Component {
                               });
                             })
                               .catch((err) => {
-                                console.log(err)
                                 this.setState({ isLoading: false }, () => toast.error('❌' + err.message, {
                                   position: 'bottom-left',
                                   hideProgressBar: true
                                 }))
-                                console.log(err)
                               })
                            })
                            .catch(err => {
@@ -211,8 +244,7 @@ class User extends Component {
                          data[oldData.tableData.id] = newData
                          editUser(newData, oldData.id)
                            .then(message => {
-                             console.log('✔️')
-                             data.password = ''
+                             setTimeout(() => { data.password = ''}, 200)
                              this.setState({ data }, () => {
                                toast.success('✔️'+message.message, {
                                 position: toast.POSITION.BOTTOM_LEFT,
