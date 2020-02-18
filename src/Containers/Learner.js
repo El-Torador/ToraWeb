@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Loader } from 'semantic-ui-react'
+import { Loader, Popup } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import Head from '../Components/Header/Header'
 import ModalLogout from '../Components/Sections/ModalLogout'
@@ -71,7 +71,7 @@ class Learner extends Component {
                     created_at: "1998-11-07T00:00:00+00:00",
                     cni: '38745345'
                 }],
-            isLoading: false,
+            isLoading: true,
             modalOpen: false,
             value: '',
             addLearner: false
@@ -79,7 +79,6 @@ class Learner extends Component {
     }
 
     componentDidMount(){
-        this.setState({isLoading: true})
         getLearner()
         .then((learner)=>{
             if(learner){
@@ -91,6 +90,8 @@ class Learner extends Component {
                           }})
                         }
                 })
+            }else{
+                toast.info('ℹ️ Pas d\'apprenant Enregistré !', {position: 'bottom-left', hideProgressBar: true})
             }
         })
             .catch((err) => {
@@ -136,58 +137,69 @@ class Learner extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <div>
-                    <Head location="/apprenant" handleOpen={this.toggleModal} />
-                    <div className="ui container padding">
-                        <h1>
-                            <i className="icon user secret large"></i> Gestion des Apprenants
-                        </h1>
-                        <br /> <br />
-                        <div className="ui search">
-                            <div className="ui left icon input">
-                                <i className="icon search"></i>
-                                <input
-                                    className="prompt"
-                                    type="text"
-                                    placeholder="Rechercher une instance..."
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-                        <Loader active={true} />
+              <div>
+                <Head location="/learner" handleOpen={this.toggleModal} />
+                <br />
+                <div className="ui container padding">
+                  <h1>
+                    <i className="icon user student large yellow"></i> Gestion des
+                    Apprenants
+                  </h1>
+                  <br /> <br />
+                  <div className="ui search">
+                    <div className="ui left icon input">
+                      <i className="icon search"></i>
+                      <Popup
+                        content="Rechercher un apprenant"
+                        trigger={
+                          <input
+                            className="prompt"
+                            type="text"
+                            placeholder="Rechercher un apprenant..."
+                            onChange={this.handleChange}
+                          />
+                        }
+                        position="left center"
+                      />
                     </div>
-                    <button
-                        className="circular ui icon disabled massive button is_fix"
-                        title="Ajouter une instance"
-                        onClick={this.toggleModalAddLearner}
-                    >
-                        <i className="icon plus"></i>
-                    </button>
-                    <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
+                  </div>
+                  <Loader active={true} />
                 </div>
-            )
+                <button
+                  className="circular ui icon disabled yellow massive button is_fix"
+                  title="Ajouter une instance"
+                  onClick={this.toggleModalAddLearner}
+                >
+                  <i className="icon plus"></i>
+                </button>
+                <ModalLogout
+                  modalOpen={this.state.modalOpen}
+                  onClose={this.toggleModal}
+                />
+              </div>
+            );
         } else {
             return (
                 <div>
-                    <Head location="/apprenant" handleOpen={this.toggleModal} />
+                    <Head location="/learner" handleOpen={this.toggleModal} />
                     <br />
                     <div className="ui container padding">
                         <h1>
-                            <i className="icon student large"></i> Gestion des Apprenants
+                            <i className="icon student large yellow"></i> Gestion des Apprenants
                         </h1>
                         <br /> <br />
                         <div className="ui search">
                             <div className="ui left icon input">
                                 <i className="icon search"></i>
-                                <input
+                                <Popup content="Rechercher un apprenant" trigger={<input
                                     className="prompt"
                                     type="text"
                                     placeholder="Rechercher un apprenant..."
                                     onChange={this.handleChange}
-                                />
+                                />} position="left center" />
                             </div>
                         </div>
-                        <br /> <br/>
+                        <br />
                         <div className="ui grid">
                             <RowLearner
                                 learner={this.state.learner}
@@ -195,13 +207,14 @@ class Learner extends Component {
                             />
                         </div>
                     </div>
-                    <button
-                        className="circular ui icon massive button is_fix"
-                        title="Ajouter une instance"
+                    <Popup content="Ajouter un apprenant" trigger={<button
+                        className="circular ui icon massive yellow button is_fix"
                         onClick={this.toggleModalAddLearner}
                     >
                         <i className="icon plus"></i>
-                    </button>
+                    </button>} 
+                        position="left center"
+                    />
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
                     <AddLearner addLearner={this.state.addLearner} exit={this.toggleModalAddLearner} newLearner={this.newLearner}/>
                 </div>
