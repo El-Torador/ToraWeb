@@ -24,11 +24,17 @@ class AddLearner extends Component {
     }
     componentDidMount(){
         getInstance()
-        .then((instances)=>{
-            if(instances){
-                this.setState({instances})
+          .then(instances => {
+            if (instances) {
+              this.setState({ instances });
             }
-        })
+          })
+          .catch(err => {
+            toast.error("❌" + err.message, {
+              position: "bottom-left",
+              hideProgressBar: true
+            });
+          });
     }
 
     /**
@@ -94,7 +100,7 @@ class AddLearner extends Component {
                 open={this.props.addLearner}
                 size="large"
             >
-                <Header icon="plus" content="Ajouter un apprenant" />
+                <Header icon="plus yellow" content="Ajouter un apprenant" />
                 <Modal.Content>
                     <Dimmer.Dimmable as={Segment} dimmed={this.state.isLoading}>
                         <Dimmer active={this.state.isLoading} inverted>
