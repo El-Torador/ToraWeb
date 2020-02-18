@@ -1,4 +1,5 @@
 import React from 'react'
+import { Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import FilterResults from 'react-filter-search'
 import Fade from 'react-reveal/Fade'
@@ -35,12 +36,12 @@ const RowLearner = (props) =>{
                                         </div>
                                         <div className="extra content">
                                             <span className="left floated">
-                                            <Link title="Editer" to={"/learner/edit/" + item.id}>
+                                            <Popup content="Editer" trigger={<Link to={"/learner/edit/" + item.id}>
                                                 <i className="icon pencil yellow large"></i>
-                                            </Link>
+                                            </Link>} position="top center" />
                                             </span>
                                             <span className="right floated">
-                                                <ShowDetails trigger={<i className="icon eye blue large" id={"show_" + item.id} title="Détails"></i>} learner={item} />   
+                                              <Popup content="Plus d'infos" trigger={<ShowDetails trigger={<i className="icon eye blue large" title="Plus d'infos" id={"show_" + item.id} ></i>} learner={item} /> } position="top center" />  
                                             </span>
                                         </div>
                       </div>
@@ -52,7 +53,10 @@ const RowLearner = (props) =>{
             />
           );
         }else{
-          return <p className="description">Pas d'apprenant pour le moment !</p>
+          return <div className="ui container">
+          <br/><br/><br />
+            <h1 style={{textAlign:'center'}}>Pas d'apprenant Enregistré ! </h1>
+          </div>
         }
     
 }
