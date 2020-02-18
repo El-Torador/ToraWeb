@@ -100,7 +100,7 @@ class EditInstance extends Component {
                     <br />
                     <br />
                     <h2 className="ui title">
-                      <i className="icon edit large"></i> Editer une instance
+                      <i className="icon edit large yellow"></i> Editer une instance
                     </h2>
                     <Dimmer.Dimmable as={Segment} dimmed={this.state.loading}>
                       <Dimmer active={this.state.loading} inverted>
