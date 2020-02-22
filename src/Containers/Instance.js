@@ -86,6 +86,7 @@ class Instance extends Component {
             return (
               <div>
                 <Head location="/instance" handleOpen={this.toggleModal} />
+                <br />
                 <div className="ui container padding">
                   <h1>
                     <i className="icon globe large yellow"></i>Gestion des Instances
