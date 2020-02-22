@@ -34,72 +34,75 @@ class ShowDetails extends Component {
                 <Modal
                     trigger={this.props.trigger}
                     closeIcon
+                    id="Details"
                 >
                     <Header icon='student yellow' content={this.props.learner.first_name+" "+this.props.learner.last_name} />
                     <Modal.Content image>
-                        {this.props.learner.sex === "Masculin" ? <Image wrapper="true" size="large" src={avatar} /> : <Image wrapper="true" size="large" src={girl} />}
+                        {this.props.learner.sex === "Masculin" ? <Image wrapper="true" size="large" src={avatar}  /> : <Image wrapper="true" size="large" src={girl}  />}
                         <Modal.Description>
-                
-                            <p>
-                                
-                                <strong>Noms: </strong> <span> {this.props.learner.first_name}</span>
-                                
-                            </p>
-                            <p>
+                            <div className="margin-avatar">
 
-                                <strong>Prenoms: </strong> <span> {this.props.learner.last_name}</span>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Noms: </strong> <span> {this.props.learner.first_name}</span>
 
-                                <strong>Date de naisance: </strong> <span> {moment(this.props.learner.birth_date).format("DD/MM/YYYY")}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Prenoms: </strong> <span> {this.props.learner.last_name}</span>
 
-                                <strong>Sexe: </strong> <span> {this.props.learner.sex}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Date de naisance: </strong> <span> {moment(this.props.learner.birth_date).format("DD/MM/YYYY")}</span>
 
-                                <strong>Statut matrimonial: </strong> <span> {this.props.learner.marital_status}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Sexe: </strong> <span> {this.props.learner.sex}</span>
 
-                                <strong>CNI: </strong> <span> {this.props.learner.cni}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Statut matrimonial: </strong> <span> {this.props.learner.marital_status}</span>
 
-                                <strong>Profession: </strong> <span> {this.props.learner.jobs}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>CNI: </strong> <span> {this.props.learner.cni}</span>
 
-                                <strong>Adresse: </strong> <span> {this.props.learner.address}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Profession: </strong> <span> {this.props.learner.jobs}</span>
 
-                                <strong>Contact: </strong> <span> {this.props.learner.phone_number}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Adresse: </strong> <span> {this.props.learner.address}</span>
 
-                                <strong>Email: </strong> <span> {this.props.learner.email}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Contact: </strong> <span> {this.props.learner.phone_number}</span>
 
-                                <strong>Instance: </strong> <span> {this.state.instance.name ? this.state.instance.name+"("+this.state.instance.city+")" : this.props.learner.instance_id}</span>
+                                </p>
+                                <p>
 
-                            </p>
-                            <p>
+                                    <strong>Email: </strong> <span> {this.props.learner.email}</span>
 
-                                <strong>Inscrit le : </strong> <span> { moment(this.props.learner.created_at).format("DD/MM/YYYY")}</span>
+                                </p>
+                                <p>
 
-                            </p>
+                                    <strong>Instance: </strong> <span> {this.state.instance.name ? this.state.instance.name + "(" + this.state.instance.city + ")" : this.props.learner.instance_id}</span>
+
+                                </p>
+                                <p>
+
+                                    <strong>Inscrit le : </strong> <span> {moment(this.props.learner.created_at).format("DD/MM/YYYY")}</span>
+
+                                </p>
+                            </div>
                         </Modal.Description>
                     </Modal.Content>
                 </Modal>
