@@ -110,13 +110,14 @@ class AddLearner extends Component {
                             <div className="field">
                                 <div className="ui left icon input">
                                     <i className="icon user"></i>
-                                    <input type="text" pattern="[a-zA-Z]{3,}" autoFocus name="first_name" id="first_name" placeholder="Noms ex:KAGMENI" title="Noms" autoComplete="off" required />
+                                    <input type="text" pattern="[a-zA-Z_-\s]{3,}" autoFocus name="first_name" id="first_name" placeholder="Noms ex:KAGMENI" title="Noms" autoComplete="off" required />
                                 </div>
                             </div>
                             <div className="field">
                                 <div className="ui left icon input">
                                     <i className="icon user outline"></i>
-                                    <input type="text" name="last_name" autoCapitalize="true" id="last_name" placeholder="Prenoms ex:Jordan" title="Prenoms" autoComplete="off" required />
+                                    <input type="text" name="last_name" 
+                                    pattern="[a-zA-Z_-\s]" autoCapitalize="true" id="last_name" placeholder="Prenoms ex:Jordan" title="Prenoms" autoComplete="off" required />
                                 </div>
                             </div>
                             <div className="field">
