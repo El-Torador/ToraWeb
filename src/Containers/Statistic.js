@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {  } from 'semantic-ui-react'
 import Head from '../Components/Header/Header'
 import ModalLogout from '../Components/Sections/ModalLogout'
+import './Statistic.css'
 /**
  * HOME CONTAINER
  */
@@ -24,6 +25,17 @@ class Statistic extends Component {
             return (
                 <div>
                     <Head location="/home" handleOpen={this.toggleModal} />
+                    <br />
+                    <div className="ui container">
+                        <h1>
+                            <i className="icon chart line large yellow"></i> Statistiques
+                        </h1>
+                        <br /> <br />
+                        <div className="center-cog">
+                            <i className="ui icon cog massive yellow rotate"></i>
+                            <h3>En cours de developpement...</h3>
+                        </div>
+                    </div>
 
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
                 </div>
@@ -33,8 +45,15 @@ class Statistic extends Component {
               <div>
                 <Head location="/home" handleOpen={this.toggleModal} />
                 <br />
-                <br />
-                <div className="ui container">
+                <div className="ui container padding">
+                        <h1>
+                            <i className="icon chart line large yellow"></i> Statistiques
+                        </h1>
+                        <br /> <br />
+                        <div className="center-cog">
+                            <i className="ui icon cog massive yellow rotate"></i>
+                            <h3>En cours de developpement...</h3>
+                        </div>
                 </div>
                 <ModalLogout
                   modalOpen={this.state.modalOpen}
