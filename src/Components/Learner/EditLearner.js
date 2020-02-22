@@ -120,7 +120,7 @@ class EditLearner extends Component {
                             <br />
                             <br />
                             <h2 className="ui title">
-                                <i className="icon edit large yellow"></i> Editer un apprenant
+                                <i className="icon edit large yellow"></i> Editer l'apprenant
                             </h2>
                             <Dimmer.Dimmable as={Segment} dimmed={this.state.loading}>
                                 <Dimmer active={this.state.loading} inverted>
@@ -134,13 +134,15 @@ class EditLearner extends Component {
                                         <div className="field">
                                             <div className="ui left icon input">
                                                 <i className="icon user"></i>
-                                                <input type="text" pattern="[a-zA-Z\s]{3,}" autoFocus name="first_name" id="first_name" placeholder="Noms ex:KAGMENI" title="Noms" autoComplete="off" defaultValue={learner.first_name} required />
+                                                <input type="text" pattern="[a-zA-Z_-\s]{3,}" autoFocus name="first_name" id="first_name" placeholder="Noms ex:KAGMENI" title="Noms" autoComplete="off" defaultValue={learner.first_name} required />
                                             </div>
                                         </div>
                                         <div className="field">
                                             <div className="ui left icon input">
                                                 <i className="icon user outline"></i>
-                                                <input type="text" name="last_name" autoCapitalize="true" id="last_name" placeholder="Prenoms ex:Jordan" title="Prenoms" autoComplete="off" defaultValue={learner.last_name} required />
+                                                <input type="text" name="last_name" 
+                                                pattern='[a-zA-Z_-\s]'
+                                                autoCapitalize="true" id="last_name" placeholder="Prenoms ex:Jordan" title="Prenoms" autoComplete="off" defaultValue={learner.last_name} required />
                                             </div>
                                         </div>
                                         <div className="field">
@@ -245,7 +247,7 @@ class EditLearner extends Component {
                     <div>
                         <Head location="/learner" handleOpen={this.toggleModal} />
                         <br />
-                        <div className="ui container">
+                        <div className="ui container padding">
                             <br />
                             <Link to="/learner" className="ui button red inverted">
                                 Retour
