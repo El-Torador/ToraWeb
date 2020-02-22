@@ -1,3 +1,15 @@
 .padding {
     padding: 50px 50px;
 }
+.rotate{
+    animation: rotateAnim 10s linear infinite;
+}
+.center-cog{
+    position: absolute;
+    top: 40%;
+    right: 45%;
+}
+@keyframes rotateAnim {
+    from { transform: rotateY(0);}
+    to {transform: rotateZ(360deg);}
+}
