@@ -24,7 +24,7 @@ class EditInstance extends Component {
             modalOpen:false,
             date: ""
         }
-        this.instaceId = this.props.match.params.id
+        this.instaceId = Number(this.props.match.params.id)
     }
 
     componentDidMount(){
@@ -36,7 +36,9 @@ class EditInstance extends Component {
                 alert('Not found !')
             }
         }).catch((err)=>{
-            this.setState({isLoading: false})
+            this.setState({isLoading: false}, ()=>{
+              toast.error('❌'+err.message, {position: 'bottom-left', hideProgressBar: true})
+            })
         })
     }
     /**
@@ -100,7 +102,7 @@ class EditInstance extends Component {
                     <br />
                     <br />
                     <h2 className="ui title">
-                      <i className="icon edit large yellow"></i> Editer une instance
+                      <i className="icon edit large yellow"></i> Editer l'instance
                     </h2>
                     <Dimmer.Dimmable as={Segment} dimmed={this.state.loading}>
                       <Dimmer active={this.state.loading} inverted>
