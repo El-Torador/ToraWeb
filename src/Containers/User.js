@@ -102,10 +102,26 @@ class User extends Component {
                 }
             })
             .catch((err)=>{
-              this.setState({ isLoading: false }, () => toast.error('❌'+err.message, {
-                position: 'bottom-left',
-                hideProgressBar: true
-              }))
+              this.setState({ isLoading: false }, () => {
+                if (err.lentgh !== undefined) {
+                  toast.warn(
+                    err[0].message
+                      ? "⚠️ " + err[0].message
+                      : "⚠️ " + err.message,
+                    {
+                      position: toast.POSITION.BOTTOM_LEFT,
+                      hideProgressBar: true
+                    }
+                  );
+                  
+                } else {
+                  toast.warn(err.message ? "⚠️ " + err.message : "⚠️ " + err, {
+                    position: toast.POSITION.BOTTOM_LEFT,
+                    hideProgressBar: true
+                  });
+                  
+                }
+              })
                 
               
               })
@@ -122,9 +138,10 @@ class User extends Component {
             return (
             <div>
               <Head location="/users" handleOpen={this.toggleModal} />
+              <br />
               <div className="ui container padding">
                   <h1>
-                    <i className='icon users large'></i>Gestion des Utilisateurs
+                    <i className='icon users large yellow'></i>Gestion des Utilisateurs
                     </h1>
                   <br />
                   <Loader active={true} />
@@ -135,6 +152,7 @@ class User extends Component {
             return (
                 <div>
                 <Head location="/users" handleOpen={this.toggleModal}  />
+                <br />
                     <div className="ui container padding">
                     <h1>
                       <i className='icon users large yellow'></i>Gestion des Utilisateurs
@@ -222,18 +240,57 @@ class User extends Component {
                               });
                             })
                               .catch((err) => {
-                                this.setState({ isLoading: false }, () => toast.error('❌' + err.message, {
-                                  position: 'bottom-left',
-                                  hideProgressBar: true
-                                }))
+                                this.setState({ isLoading: false }, () => {
+                                  if (err.lentgh !== undefined) {
+                                    toast.warn(
+                                      err[0].message
+                                        ? "⚠️ " + err[0].message
+                                        : "⚠️ " + err.message,
+                                      {
+                                        position: toast.POSITION.BOTTOM_LEFT,
+                                        hideProgressBar: true
+                                      }
+                                    );
+                                    reject();
+                                  } else {
+                                    toast.warn(
+                                      err.message
+                                        ? "⚠️ " + err.message
+                                        : "⚠️ " + err,
+                                      {
+                                        position: toast.POSITION.BOTTOM_LEFT,
+                                        hideProgressBar: true
+                                      }
+                                    );
+                                    reject();
+                                  }
+                                })
                               })
                            })
                            .catch(err => {
-                             toast.warn(err.message ? '⚠️' + err.message : '⚠️' +err, {
-                               position: toast.POSITION.BOTTOM_LEFT,
-                               hideProgressBar: true
-                             });
-                             reject()
+                             if (err.lentgh !== undefined) {
+                               toast.warn(
+                                 err[0].message
+                                   ? "⚠️ " + err[0].message
+                                   : "⚠️ " + err.message,
+                                 {
+                                   position: toast.POSITION.BOTTOM_LEFT,
+                                   hideProgressBar: true
+                                 }
+                               );
+                               reject();
+                             } else {
+                               toast.warn(
+                                 err.message
+                                   ? "⚠️ " + err.message
+                                   : "⚠️ " + err,
+                                 {
+                                   position: toast.POSITION.BOTTOM_LEFT,
+                                   hideProgressBar: true
+                                 }
+                               );
+                               reject();
+                             }
                              });
                        }, 600);
                      }),
@@ -253,11 +310,29 @@ class User extends Component {
                              });
                            })
                            .catch(err => {
-                             toast.warn(err.message ? '⚠️' + err.message : '⚠️' +err, {
-                               position: toast.POSITION.BOTTOM_LEFT,
-                               hideProgressBar: true
-                             });
-                            reject()
+                             if(err.lentgh !== undefined){
+                                toast.warn(
+                                  err[0].message
+                                    ? "⚠️ " + err[0].message
+                                    : "⚠️ " + err.message,
+                                  {
+                                    position: toast.POSITION.BOTTOM_LEFT,
+                                    hideProgressBar: true
+                                  }
+                                );
+                                reject();
+                             }else{
+                               toast.warn(
+                                 err.message
+                                   ? "⚠️ " + err.message
+                                   : "⚠️ " + err,
+                                 {
+                                   position: toast.POSITION.BOTTOM_LEFT,
+                                   hideProgressBar: true
+                                 }
+                               );
+                               reject();
+                             }
                              
                            });
                        }, 200);
@@ -279,11 +354,29 @@ class User extends Component {
                                 });
                            })
                            .catch(err =>{
-                             toast.warn(err.message ? '⚠️' + err.message : '⚠️' +err, {
-                               position: toast.POSITION.BOTTOM_LEFT,
-                               hideProgressBar: true
-                             });
-                             reject();
+                             if (err.lentgh !== undefined) {
+                               toast.warn(
+                                 err[0].message
+                                   ? "⚠️ " + err[0].message
+                                   : "⚠️ " + err.message,
+                                 {
+                                   position: toast.POSITION.BOTTOM_LEFT,
+                                   hideProgressBar: true
+                                 }
+                               );
+                               reject();
+                             } else {
+                               toast.warn(
+                                 err.message
+                                   ? "⚠️ " + err.message
+                                   : "⚠️ " + err,
+                                 {
+                                   position: toast.POSITION.BOTTOM_LEFT,
+                                   hideProgressBar: true
+                                 }
+                               );
+                               reject();
+                             }
                       
                            } );
                        }, 600);
