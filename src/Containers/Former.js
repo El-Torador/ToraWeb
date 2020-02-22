@@ -24,10 +24,10 @@ class Former extends Component {
         if(this.state.isLoading){
             return ( 
                 <div>
-                    <Head location="/formateur" handleOpen={this.toggleModal} />
+                    <Head location="/former" handleOpen={this.toggleModal} />
                     <div className="ui container padding">
                         <h1>
-                            <i className="icon user secret large"></i> Gestion des Formateurs
+                            <i className="icon user secret large yellow"></i> Gestion des Formateurs
                         </h1>
                         <br /> <br />
                         <Loader active={true} />
@@ -38,13 +38,17 @@ class Former extends Component {
         }else{
             return ( 
                 <div>
-                    <Head location="/formateur" handleOpen={this.toggleModal} />
+                    <Head location="/former" handleOpen={this.toggleModal} />
                     <br />
                     <div className="ui container padding">
                         <h1>
-                            <i className="icon user secret large"></i> Gestion des Formateurs
+                            <i className="icon user secret large yellow"></i> Gestion des Formateurs
                         </h1>
                         <br /> <br />
+                        <div className="center-cog">
+                            <i className="ui icon cog massive yellow rotate"></i>
+                            <h3>En cours de developpement...</h3>
+                        </div>
                     </div>
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal}/>
                 </div>
