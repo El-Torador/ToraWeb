@@ -8,6 +8,11 @@ import ShowDetails from './ShowDetails'
 /**
  * LIST INSTANCE COMPONENT (<ROWINSTANCE/>)
  */
+
+const formatName = name =>{
+  const nameArray = name.split(' ')
+  return nameArray[0]
+}
 const RowInstance = (props) =>{
     
         if(props.instance){
@@ -27,7 +32,7 @@ const RowInstance = (props) =>{
                           </div>
                           <div className="description">
                             {item.name} situé dans la ville de {item.city} donc
-                          le chef de centre est M. <b>{item.responsable}</b>.
+                          le chef de centre est M. <b>{formatName(item.responsable)}</b>.
                         </div>
                           <div className="footer">
                               &copy; IAI-CAMEROUN
