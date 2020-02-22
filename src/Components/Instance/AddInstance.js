@@ -171,7 +171,8 @@ class AddInstance extends Component{
 
 AddInstance.propTypes = {
     exit: PropTypes.func.isRequired,
-    addInstance: PropTypes.bool.isRequired
+    addInstance: PropTypes.bool.isRequired,
+    newInstance: PropTypes.func.isRequired
 }
 
 export default AddInstance
