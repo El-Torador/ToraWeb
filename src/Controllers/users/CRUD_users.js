@@ -78,7 +78,6 @@ export const editUser = (options, id) =>{
                 resolve(message.data)
             })
             .catch((err)=>{
-                console.log({...err})
                 err.response.data
                       ? reject(err.response.data)
                       : reject(err);
