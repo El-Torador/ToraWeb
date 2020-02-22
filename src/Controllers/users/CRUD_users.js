@@ -12,7 +12,7 @@ export const getUsers = ()=>{
            resolve(users.data)
         })
         .catch((err) => {
-            reject(err)
+             err.response.data ? reject(err.response.data) : reject(err);
         }) 
    })
         
@@ -43,7 +43,7 @@ export const addUser = options =>{
                 resolve(message.data)
             })
             .catch((err)=>{
-                reject(err)
+                err.response.data ? reject(err.response.data) : reject(err);
             })
         }else{
             const error = new Error('Vos paramètres ne sont pas complet.')
@@ -73,12 +73,15 @@ export const editUser = (options, id) =>{
             payload.is_lock = options.is_lock
             payload.instance_id = Number(options.instance_id)
             payload.api_key = types.API_KEY_USERS
-            axios.put(types.END_POINT+'/users/update/'+Number(id), payload)
+            axios.put(types.END_POINT+'/users/update/', payload)
             .then((message)=>{
                 resolve(message.data)
             })
             .catch((err)=>{
-                reject(err)
+                console.log({...err})
+                err.response.data
+                      ? reject(err.response.data)
+                      : reject(err);
             })
         }else{
              const error = new Error('Vos paramètres ne sont pas complet.')
@@ -99,7 +102,9 @@ export const deleteUser = id =>{
             resolve(message.data)
         })
         .catch((err)=>{
-            reject(err)
+             err.response.data
+                      ? reject(err.response.data)
+                      : reject(err);
         })
     })
 }
