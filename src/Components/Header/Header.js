@@ -43,7 +43,6 @@ const Head = (props) => {
                 />} position="bottom center" />
                 <Popup content="Gestion des formateurs" trigger={<Menu.Item
                     as={Link}
-                    disabled={true}
                     to="/former"
                     icon="user secret"
                     active={props.location === "/former" ? true : false}
