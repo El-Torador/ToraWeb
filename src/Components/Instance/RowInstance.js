@@ -46,8 +46,8 @@ const RowInstance = (props) =>{
                               position="top center"
                             />
                           </span>
-                          <span className="right floated star">
-                            <ShowDetails trigger={<i className="icon eye blue large" id={"show_" + item.id} title="Détails"></i>} instance={item} />
+                          <span className="right floated">
+                            <ShowDetails trigger={<i className="icon eye blue large" id={"show_" + item.id} title="Plus d'infos"></i>} instance={item} />
                           </span>
                         </div>
                       </div>
