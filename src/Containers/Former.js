@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Loader } from 'semantic-ui-react'
+import { Loader, Popup } from 'semantic-ui-react'
+import { getFormers } from '../Controllers/Former/CRUD_former'
 import Head from '../Components/Header/Header'
+import RowFormer from '../Components/Former/RowFormer'
 import ModalLogout from '../Components/Sections/ModalLogout'
 import './Former.css'
+import { toast } from 'react-toastify';
 /**
  * FORMER CONTAINER
  */
@@ -10,11 +13,44 @@ class Former extends Component {
     constructor(props){
         super(props)
         this.state = {
-            isLoading: false,
-            modalOpen: false
+            formers: [],
+            isLoading: true,
+            modalOpen: false,
+            value: ''
         }
     }
 
+    componentDidMount(){
+        getFormers()
+        .then((formers)=>{
+            if(formers){
+                this.setState({formers, isLoading: false}, ()=>{
+                    if (window.localStorage.getItem('flash')) {
+                        toast.success('✔️' + window.localStorage.getItem('flash'), {
+                            position: 'bottom-left', hideProgressBar: true, onClose: () => {
+                                window.localStorage.clear()
+                                window.localStorage.setItem('init_lauch', true)
+                            }
+                        })
+                    }
+                })
+            }else{
+                toast.info('ℹ️ Pas de formateur Enregistré !', {position: 'bottom-left', hideProgressBar: true})
+            }
+        })
+        .catch((err)=>{
+            this.setState({ isLoading: false }, () => toast.error('❌' + err.message, { position: 'bottom-left', hideProgressBar: true }));
+        })
+    }
+
+    /**
+    * PERMET DE METTRE A JOUR LA VALEUR DE LA RECHERCHE
+    * @param {Event} event
+    */
+    handleChange = event => {
+        const { value } = event.target
+        this.setState({ value })
+    }
     /**
      * PERMET D'OUVRIR OU DE FERMER LA MODAL DE DECONNEXION
      */
@@ -25,13 +61,38 @@ class Former extends Component {
             return ( 
                 <div>
                     <Head location="/former" handleOpen={this.toggleModal} />
+                    <br />
                     <div className="ui container padding">
                         <h1>
                             <i className="icon user secret large yellow"></i> Gestion des Formateurs
                         </h1>
                         <br /> <br />
+                        <div className="ui search">
+                            <div className="ui left icon input">
+                                <i className="icon search"></i>
+                                <Popup
+                                    content="Rechercher un apprenant"
+                                    trigger={
+                                        <input
+                                            className="prompt"
+                                            type="text"
+                                            placeholder="Rechercher un apprenant..."
+                                            onChange={this.handleChange}
+                                        />
+                                    }
+                                    position="left center"
+                                />
+                            </div>
+                        </div>
                         <Loader active={true} />
                     </div>
+                    <button
+                        className="circular ui icon disabled yellow massive button is_fix"
+                        title="Ajouter une instance"
+                        onClick={this.toggleModalAddFormer}
+                    >
+                        <i className="icon plus"></i>
+                    </button>
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
                 </div>
          )
@@ -45,11 +106,30 @@ class Former extends Component {
                             <i className="icon user secret large yellow"></i> Gestion des Formateurs
                         </h1>
                         <br /> <br />
-                        <div className="center-cog">
-                            <i className="ui icon cog massive yellow rotate"></i>
-                            <h3>En cours de developpement...</h3>
+                        <div className="ui search">
+                            <div className="ui left icon input">
+                                <i className="icon search"></i>
+                                <Popup content="Rechercher un apprenant" trigger={<input
+                                    className="prompt"
+                                    type="text"
+                                    placeholder="Rechercher un apprenant..."
+                                    onChange={this.handleChange}
+                                />} position="left center" />
+                            </div>
+                        </div>
+                        <br />
+                        <div className="ui grid">
+                            <RowFormer formers={this.state.formers} entries={this.state.value} />
                         </div>
                     </div>
+                    <Popup content="Ajouter un formateur" trigger={<button
+                        className="circular ui icon massive yellow button is_fix"
+                        onClick={this.toggleModalAddFormer}
+                    >
+                        <i className="icon plus"></i>
+                    </button>}
+                        position="left center"
+                    />
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal}/>
                 </div>
          )
