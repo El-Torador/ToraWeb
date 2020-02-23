@@ -5,7 +5,7 @@ import avatar from '../../assets/images/avatar.png'
 import girl from '../../assets/images/girl.png'
 import { toast } from 'react-toastify'
 import { getInstanceById } from '../../Controllers/instances/CRUD_instance'
-import { Modal, Header, Image } from 'semantic-ui-react'
+import { Modal, Header, Image, Popup } from 'semantic-ui-react'
 
 /**
  * SHOWDETAILS COMPONENT
@@ -103,6 +103,27 @@ class ShowDetails extends Component {
 
                                 </p>
                             </div>
+                        </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Content>
+                            <div className="ui message warning">
+                                <span className="left floated">LISTE DES FORMATIONS</span>
+                            </div>
+                            <Modal.Description>
+                            <Popup content="Ajouter une formation" trigger={<div className="list_training">
+                                <i className="icon plus large" id="lola"></i>
+                            </div>} position="right center" />
+                            </Modal.Description>                       
+                    </Modal.Content>
+                    <Modal.Content>
+                        <div className="ui message warning">
+                            <span className="left floated">LISTE DES CERTIFICATIONS</span>
+                        </div>
+                        <Modal.Description>
+
+                            <Popup content="Imprimer la certification" trigger={<div className="list_training">
+                                <i className="icon student large" id="lola"></i>
+                            </div>} position="right center" />
                         </Modal.Description>
                     </Modal.Content>
                 </Modal>
