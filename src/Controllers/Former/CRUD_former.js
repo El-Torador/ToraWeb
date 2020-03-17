@@ -45,11 +45,11 @@ export const getFormerById = id =>{
  * @param {string} options.sex
  * @param {string} options.function
  * @param {string} options.email
- * @param {string} options.avatar 
+ * @param {File} options.avatar 
  */
 export const addFormer = options =>{
     return new Promise((resolve, reject)=>{
-        if(options.matricule && options.cnps && options.first_name && options.last_name && options.birth_date && options.sex && options.function && options.email && options.avatar){
+        /*if (options.keys('matricule') && options.keys('cnps') && options.keys('first_name') && options.keys('last_name') && options.keys('birth_date') && options.keys('sex') && options.keys('function') && options.keys('email') && options.keys('avatar')){*/
             axios.post(types.END_POINT + '/former/add', options)
                 .then((message) => {
                     resolve(message.data.message)
@@ -57,10 +57,10 @@ export const addFormer = options =>{
                 .catch((err) => {
                     reject(err)
                 })
-        }else{
+        /*}else{
             const error = new Error('Vos paramètres ne sont pas complet !')
             reject(error)
-        }
+        }*/
     })
 }
 
@@ -75,12 +75,12 @@ export const addFormer = options =>{
  * @param {string} options.sex
  * @param {string} options.function
  * @param {string} options.email
- * @param {string} options.avatar
+ * @param {File} options.avatar
  * @param {number} id
  */
 export const updateFormer = (options, id) =>{
     return new Promise((resolve, reject)=>{
-        if (options.matricule && options.cnps && options.first_name && options.last_name && options.birth_date && options.sex && options.function && options.email && options.avatar) {
+        /*if (options.keys('matricule') && options.keys('cnps') && options.keys('first_name') && options.keys('last_name') && options.keys('birth_date') && options.keys///////('sex') && options.keys('function') && options.keys('email') && options.keys('avatar')) {*/
             axios.put(types.END_POINT + '/former/update/'+id, options)
                 .then((message) => {
                     resolve(message.data.message)
@@ -88,9 +88,9 @@ export const updateFormer = (options, id) =>{
                 .catch((err) => {
                     reject(err)
                 })
-        } else {
+        /*} else {
             const error = new Error('Vos paramètres ne sont pas complet !')
             reject(error)
-        }
+        }*/
     })
 }
