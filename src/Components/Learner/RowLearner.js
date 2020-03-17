@@ -41,7 +41,7 @@ const RowLearner = (props) =>{
                                             </Link>} position="top center" />
                                             </span>
                                             <span className="right floated">
-                                              <Popup content="Plus d'infos" trigger={<ShowDetails trigger={<i className="icon eye blue large" title="Plus d'infos" id={"show_" + item.id} ></i>} learner={item} /> } position="top center" />  
+                                              <Popup content="Plus d'infos" trigger={<ShowDetails trigger={<i className="icon eye blue large" title="Plus d'infos" id={"show_" + item.id} ></i>} learner={item} instance={props.instances} /> } position="top center" />  
                                             </span>
                                         </div>
                       </div>
@@ -63,6 +63,7 @@ const RowLearner = (props) =>{
 
 RowLearner.propTypes = {
   learner: PropTypes.array.isRequired,
-  entries: PropTypes.string.isRequired
+  entries: PropTypes.string.isRequired,
+  instances: PropTypes.array.isRequired
 }
 export default RowLearner
