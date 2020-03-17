@@ -3,8 +3,6 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import avatar from '../../assets/images/avatar.png'
 import girl from '../../assets/images/girl.png'
-import { toast } from 'react-toastify'
-import { getInstanceById } from '../../Controllers/instances/CRUD_instance'
 import { Modal, Header, Image, Popup } from 'semantic-ui-react'
 
 /**
@@ -13,22 +11,11 @@ import { Modal, Header, Image, Popup } from 'semantic-ui-react'
 class ShowDetails extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            instance: {}
-        } 
+        this.state = {}
     }
-    componentDidMount(){
-        getInstanceById(this.props.learner.instance_id)
-        .then((instance)=>{
-            if(instance){
-                this.setState({instance})
-            }
-        })
-        .catch((err)=>{
-            toast.error('❌'+err.message, {position: 'bottom-left', hideProgressBar:true})
-        })
-    }
+   
     render() {
+        const instance = this.props.instance.filter(item => item.id === this.props.learner.instance_id)
         return (
             <Fragment>
                 <Modal
@@ -94,7 +81,7 @@ class ShowDetails extends Component {
                                 </p>
                                 <p>
 
-                                    <strong>Instance: </strong> <span> {this.state.instance.name ? this.state.instance.name + "(" + this.state.instance.city + ")" : this.props.learner.instance_id}</span>
+                                    <strong>Instance: </strong> <span> {this.props.instance.length > 0? instance[0].name + "(" + instance[0].city + ")" : this.props.learner.instance_id}</span>
 
                                 </p>
                                 <p>
@@ -134,6 +121,7 @@ class ShowDetails extends Component {
 
 ShowDetails.propTypes = {
     trigger: PropTypes.node.isRequired,
-    learner: PropTypes.object.isRequired
+    learner: PropTypes.object.isRequired,
+    instance: PropTypes.array.isRequired
 }
 export default ShowDetails
