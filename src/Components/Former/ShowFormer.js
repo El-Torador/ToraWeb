@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import former from '../../assets/images/former.jpg'
 import formerGirl from '../../assets/images/formerGirl.jpg'
 import { Modal, Header, Image } from 'semantic-ui-react'
-import { getFormerById } from '../../Controllers/Former/CRUD_former'
-import { toast } from 'react-toastify'
 /**
  * SHOWDETAILS COMPONENT
  */
@@ -13,20 +11,7 @@ import { toast } from 'react-toastify'
  class ShowDetails extends Component {
      constructor(props){
          super(props)
-         this.state = {
-             former: {}
-         }
-     }
-     componentDidMount(){
-        getFormerById(this.props.former.id)
-        .then((former)=>{
-            if(former){
-                this.setState({former})
-            }
-        })
-        .catch((err)=>{
-            toast.error('❌'+err.message, {position:  'bottom-left', hideProgressBar: true})
-        })
+         this.state = {}
      }
 
      render() { 
