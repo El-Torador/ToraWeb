@@ -66,7 +66,7 @@ class Former extends Component {
             this.setState({formers: f})
         })
             .catch((err) => {
-                this.setState({ isLoading: false }, () => toast.error('❌' + err.message, { position: 'bottom-left', hideProgressBar: true }));
+                this.setState({ isLoading: true }, () => toast.error('❌' + err.message, { position: 'bottom-left', hideProgressBar: true }));
             })
     }
     /**
