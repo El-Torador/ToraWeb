@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { Modal, Icon, Button, Header, Dimmer, Segment, Loader } from 'semantic-ui-react'
 import { addLearner } from '../../Controllers/Learner/CRUD_learner'
-import { getInstance } from '../../Controllers/instances/CRUD_instance'
 import {
     DateInput
 } from "semantic-ui-calendar-react";
@@ -17,24 +16,9 @@ class AddLearner extends Component {
         super(props)
         toast.configure()
         this.state = {
-            instances:[],
             isLoading: false,
             birth_date: ""
         }
-    }
-    componentDidMount(){
-        getInstance()
-          .then(instances => {
-            if (instances) {
-              this.setState({ instances });
-            }
-          })
-          .catch(err => {
-            toast.error("❌" + err.message, {
-              position: "bottom-left",
-              hideProgressBar: true
-            });
-          });
     }
 
     /**
@@ -178,7 +162,7 @@ class AddLearner extends Component {
                             </div>
                             <div className="field">
                                 <select className="ui fluid dropbox" placeholder="Statut matrimonial" title="Statut matrimonial">
-                                    {this.state.instances.map((instance)=><option value={instance.id} key={instance.id}>{`${instance.name}(${instance.city})`}</option>)}
+                                    {this.props.instances.map((instance)=><option value={instance.id} key={instance.id}>{`${instance.name}(${instance.city})`}</option>)}
                                 </select>
                             </div>
                             <div className="field">
@@ -210,7 +194,8 @@ class AddLearner extends Component {
 AddLearner.propTypes = {
     exit: PropTypes.func.isRequired,
     addLearner: PropTypes.bool.isRequired,
-    newLearner: PropTypes.func.isRequired
+    newLearner: PropTypes.func.isRequired,
+    instances: PropTypes.array.isRequired
 }
 
 export default AddLearner
