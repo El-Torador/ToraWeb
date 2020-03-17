@@ -70,7 +70,7 @@ export const editUser = (options, id) =>{
             payload.username = options.username
             payload.password = options.password
             payload.roles = options.roles
-            payload.is_lock = options.is_lock
+            payload.is_lock = options.is_lock === "true" ? true : false
             payload.instance_id = Number(options.instance_id)
             payload.api_key = types.API_KEY_USERS
             axios.put(types.END_POINT+'/users/update/'+id, payload)
