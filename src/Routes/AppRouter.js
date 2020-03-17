@@ -15,6 +15,7 @@ import E_Learning from '../Containers/E-Learning'
 import Discipline from '../Containers/Discipline'
 import EditDiscipline from '../Components/Discipline/EditDiscipline'
 import EditModule from '../Components/Qualifiant/EditQualifiant'
+import EditFormer from '../Components/Former/EditFormer'
 /**
  * ROUTER COMPONENT
  */
@@ -28,6 +29,7 @@ class AppRouter extends Component{
             <Route path="/training/qualifying/module/edit/:id" component={EditModule} />
             <Route path="/learner/edit/:id" component={EditLearner} />
             <Route path="/instance/edit/:id" component={EditInstance} />
+            <Route path="/former/edit/:id" component={EditFormer} />
             <Route path="/instance" component={Instance} />
             <Route path="/users" component={User} />
             <Route path="/training/certifying" component={Certifiant} />
@@ -37,7 +39,7 @@ class AppRouter extends Component{
             <Route path="/learner" component={Learner} />
             <Route path="/former" component={Former} />
             <Route path="/home" component={Statistic} />
-            
+            <Route component={()=><h1>404 NOT FOUND !</h1>} />
             
           </Switch>
         );
