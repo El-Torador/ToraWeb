@@ -40,7 +40,7 @@ class Training extends Component {
       return (
         <div>
           <Head location="/training" handleOpen={this.toggleModal} />
-          <Fade right>
+          <Fade top>
             <Carousel showStatus={false} showThumbs={false} autoPlay={true} infiniteLoop={true} showArrows={false} dynamicHieght={true} interval={5000} transitionTime={1000} useKeyboardArrows={true}>
               <div>
                 <img
