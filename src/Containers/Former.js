@@ -6,6 +6,7 @@ import RowFormer from '../Components/Former/RowFormer'
 import ModalLogout from '../Components/Sections/ModalLogout'
 import './Former.css'
 import { toast } from 'react-toastify';
+import AddFormer from '../Components/Former/AddFormer';
 /**
  * FORMER CONTAINER
  */
@@ -16,6 +17,7 @@ class Former extends Component {
             formers: [],
             isLoading: true,
             modalOpen: false,
+            addFormer: false,
             value: ''
         }
     }
@@ -52,9 +54,30 @@ class Former extends Component {
         this.setState({ value })
     }
     /**
+     * AJOUTE UN NOUEAU FORMATEUR
+     * @param {Object} former
+     */
+    newFormer = former =>{
+        getFormers()
+        .then((formers)=>{
+            const form = formers.filter(item => item.first_name === former.first_name)
+            former.id = form[0].id
+            const f = [...this.state.formers, former]
+            this.setState({formers: f})
+        })
+            .catch((err) => {
+                this.setState({ isLoading: false }, () => toast.error('❌' + err.message, { position: 'bottom-left', hideProgressBar: true }));
+            })
+    }
+    /**
      * PERMET D'OUVRIR OU DE FERMER LA MODAL DE DECONNEXION
      */
     toggleModal = () => this.setState({ modalOpen: !this.state.modalOpen })
+
+    /**
+    * PERMET D'OUVRIR OU DE FERMER LA MODAL D'AJOUT DE FORMATEUR
+    */
+    toggleModalAddFormer = () => this.setState({ addFormer: !this.state.addFormer })
 
     render() { 
         if(this.state.isLoading){
@@ -131,6 +154,7 @@ class Former extends Component {
                         position="left center"
                     />
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal}/>
+                    <AddFormer addFormer={this.state.addFormer} exit={this.toggleModalAddFormer} newFormer={this.newFormer}  />
                 </div>
          )
         }
