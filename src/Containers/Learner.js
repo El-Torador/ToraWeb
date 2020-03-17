@@ -6,6 +6,7 @@ import ModalLogout from '../Components/Sections/ModalLogout'
 import RowLearner from '../Components/Learner/RowLearner'
 import AddLearner from '../Components/Learner/AddLearner'
 import { getLearner } from '../Controllers/Learner/CRUD_learner'
+import { getInstance } from '../Controllers/instances/CRUD_instance'
 import './Learner.css'
 /**
  * LEARNER CONTAINER
@@ -14,63 +15,8 @@ class Learner extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            learner: [{
-                id: 1,
-                first_name: 'KAGMENI',
-                last_name: 'jordan',
-                birth_date: "1998-11-07T00:00:00+00:00",
-                marital_status: 'Célibataire',
-                sex: 'Masculin',
-                jobs: 'Architecte solution hybride',
-                address: 'Bastos',
-                phone_number: '697040511',
-                email: 'kagmeni77@gmail.com',
-                instance_id: 5,
-                created_at: "1998-11-07T00:00:00+00:00",
-                cni: '38745345'
-            }, {
-                    id: 2,
-                    first_name: 'NOU-NYANKAM',
-                    last_name: 'marc',
-                    birth_date: "1998-11-07T00:00:00+00:00",
-                    marital_status: 'Célibataire',
-                    sex: 'Masculin',
-                    jobs: 'Architecte solution LPM',
-                    address: 'Bastos',
-                    phone_number: '678765544',
-                    email: 'marcnouyeu@gmail.com',
-                    instance_id: 6,
-                    created_at: "1998-11-07T00:00:00+00:00",
-                    cni: '38745345'
-                }, {
-                    id: 3,
-                    first_name: 'TIYA',
-                    last_name: 'florian',
-                    birth_date: "1999-11-07T00:00:00+00:00",
-                    marital_status: 'Célibataire',
-                    sex: 'Masculin',
-                    jobs: 'Project Manager',
-                    address: 'Bastos',
-                    phone_number: '698556673',
-                    email: 'tiyaflorian@gmail.com',
-                    instance_id: 7,
-                    created_at: "1998-11-07T00:00:00+00:00",
-                    cni: '38745345'
-                }, {
-                    id: 4,
-                    first_name: 'SIEYONJI',
-                    last_name: 'sylvia',
-                    birth_date: "1992-11-07T00:00:00+00:00",
-                    marital_status: 'Fiancé',
-                    sex: 'Féminin',
-                    jobs: 'Experte marketing',
-                    address: 'Bonamoussadi',
-                    phone_number: '679719827',
-                    email: 'sylviaunnel@gmail.com',
-                    instance_id: 15,
-                    created_at: "1998-11-07T00:00:00+00:00",
-                    cni: '38745345'
-                }],
+            learner: [],
+            instances:[],
             isLoading: true,
             modalOpen: false,
             value: '',
@@ -89,8 +35,32 @@ class Learner extends Component {
                             window.localStorage.setItem('init_lauch', true)
                           }})
                         }
+                    getInstance()
+                        .then(instances => {
+                            if (instances) {
+                                this.setState({ instances });
+                            }
+                        })
+                        .catch(err => {
+                            toast.error("❌" + err.message, {
+                                position: "bottom-left",
+                                hideProgressBar: true
+                            });
+                        });
                 })
             }else{
+                getInstance()
+                    .then(instances => {
+                        if (instances) {
+                            this.setState({ instances });
+                        }
+                    })
+                    .catch(err => {
+                        toast.error("❌" + err.message, {
+                            position: "bottom-left",
+                            hideProgressBar: true
+                        });
+                    });
                 toast.info('ℹ️ Pas d\'apprenant Enregistré !', {position: 'bottom-left', hideProgressBar: true})
             }
         })
@@ -100,6 +70,7 @@ class Learner extends Component {
     }
     /**
      * AJOUTE UN NOUVEL APPRENANT
+     * @param {Object} learner
      */
     newLearner = learner => {
         getLearner()
@@ -204,6 +175,7 @@ class Learner extends Component {
                             <RowLearner
                                 learner={this.state.learner}
                                 entries={this.state.value}
+                                instances={this.state.instances}
                             />
                         </div>
                     </div>
@@ -216,7 +188,7 @@ class Learner extends Component {
                         position="left center"
                     />
                     <ModalLogout modalOpen={this.state.modalOpen} onClose={this.toggleModal} />
-                    <AddLearner addLearner={this.state.addLearner} exit={this.toggleModalAddLearner} newLearner={this.newLearner}/>
+                    <AddLearner addLearner={this.state.addLearner} exit={this.toggleModalAddLearner} newLearner={this.newLearner} instances = {this.state.instances}/>
                 </div>
             )
         }
