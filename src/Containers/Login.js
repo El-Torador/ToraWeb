@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { } from 'react-toastify';
+import { toast } from 'react-toastify';
 //import WriteSpeed from '../Components/WriteSpeed/WriteSpeed'
 import './Login.css'
 import { Loader } from 'semantic-ui-react'
@@ -32,11 +32,17 @@ class Login extends Component {
     handleSubmit = (e)=>{
         e.preventDefault();
         this.setState({loading: true})
-        
+      if (e.target[0].value === 'Admin' && e.target[1].value === 'admin') {
+        window.sessionStorage.setItem('ssid_learn', Math.random())
+        this.props.history.push('/home')
+      } else {
+        toast.error('❌ Nom utilisateur ou mot de passe incorrect!', {
+          position: 'bottom-left', hideProgressBar: true
+        })
+      }
         console.log(e.target[0].value, e.target[1].value)
         setTimeout(()=>{
             this.setState({ loading: false });
-            this.props.history.push('/users')
         }, 1000)
     }
     render() {
@@ -86,7 +92,7 @@ class Login extends Component {
                           <input
                             type="password"
                             name="password"
-                            pattern="[a-zA-Z0-9]{7,}"
+                            pattern="[a-zA-Z0-9]{4,}"
                             title="Password"
                             placeholder="Password"
                             className="rounded"
