@@ -16,6 +16,7 @@ import Discipline from '../Containers/Discipline'
 import EditDiscipline from '../Components/Discipline/EditDiscipline'
 import EditModule from '../Components/Qualifiant/EditQualifiant'
 import EditFormer from '../Components/Former/EditFormer'
+import ProtectedRouter from './ProtectedRouter/ProtectedRouter'
 /**
  * ROUTER COMPONENT
  */
@@ -24,21 +25,21 @@ class AppRouter extends Component{
         return (
           <Switch>
             <Route exact path="/" component={Login} />
-            <Route path="/training/qualifying/module/discipline/edit/:id" component={EditDiscipline} />
-            <Route path="/training/qualifying/module/discipline/:id" component={Discipline} />
-            <Route path="/training/qualifying/module/edit/:id" component={EditModule} />
-            <Route path="/learner/edit/:id" component={EditLearner} />
-            <Route path="/instance/edit/:id" component={EditInstance} />
-            <Route path="/former/edit/:id" component={EditFormer} />
-            <Route path="/instance" component={Instance} />
-            <Route path="/users" component={User} />
-            <Route path="/training/certifying" component={Certifiant} />
-            <Route path="/training/qualifying/module" component={Qualifiant} />
-            <Route path="/training/e-learning" component={E_Learning} />
-            <Route path="/training" component={Training} />
-            <Route path="/learner" component={Learner} />
-            <Route path="/former" component={Former} />
-            <Route path="/home" component={Statistic} />
+            <ProtectedRouter path="/training/qualifying/module/discipline/edit/:id" component={EditDiscipline} />
+            <ProtectedRouter path="/training/qualifying/module/discipline/:id" component={Discipline} />
+            <ProtectedRouter path="/training/qualifying/module/edit/:id" component={EditModule} />
+            <ProtectedRouter path="/learner/edit/:id" component={EditLearner} />
+            <ProtectedRouter path="/instance/edit/:id" component={EditInstance} />
+            <ProtectedRouter path="/former/edit/:id" component={EditFormer} />
+            <ProtectedRouter path="/instance" component={Instance} />
+            <ProtectedRouter path="/users" component={User} />
+            <ProtectedRouter path="/training/certifying" component={Certifiant} />
+            <ProtectedRouter path="/training/qualifying/module" component={Qualifiant} />
+            <ProtectedRouter path="/training/e-learning" component={E_Learning} />
+            <ProtectedRouter path="/training" component={Training} />
+            <ProtectedRouter path="/learner" component={Learner} />
+            <ProtectedRouter path="/former" component={Former} />
+            <ProtectedRouter path="/home" component={Statistic} />
             <Route component={()=><h1>404 NOT FOUND !</h1>} />
             
           </Switch>
