@@ -31,7 +31,7 @@ const RowLearner = (props) =>{
                                                 <span>{item.last_name}</span>
                                             </div>
                                             <div className="description">
-                                                {item.first_name} est un {item.jobs} vivant à {item.address}
+                                                {item.first_name} est {item.sex === 'Masculin' ? 'un' : 'une'} {item.jobs} vivant à {item.address}
                                             </div>
                                         </div>
                                         <div className="extra content">
