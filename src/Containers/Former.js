@@ -94,12 +94,12 @@ class Former extends Component {
                             <div className="ui left icon input">
                                 <i className="icon search"></i>
                                 <Popup
-                                    content="Rechercher un apprenant"
+                                    content="Rechercher un formateur"
                                     trigger={
                                         <input
                                             className="prompt"
                                             type="text"
-                                            placeholder="Rechercher un apprenant..."
+                                            placeholder="Rechercher un formateur..."
                                             onChange={this.handleChange}
                                         />
                                     }
@@ -132,10 +132,10 @@ class Former extends Component {
                         <div className="ui search">
                             <div className="ui left icon input">
                                 <i className="icon search"></i>
-                                <Popup content="Rechercher un apprenant" trigger={<input
+                                <Popup content="Rechercher un formateur" trigger={<input
                                     className="prompt"
                                     type="text"
-                                    placeholder="Rechercher un apprenant..."
+                                    placeholder="Rechercher un formateur..."
                                     onChange={this.handleChange}
                                 />} position="left center" />
                             </div>
