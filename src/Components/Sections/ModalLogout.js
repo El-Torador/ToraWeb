@@ -30,7 +30,7 @@ class ModalLogout extends Component {
                         <Icon name="remove" /> Non
                     </Button>
                     <Link to="/">
-                        <Button color="red" inverted>
+                        <Button color="red" onClick={()=>{window.sessionStorage.clear()}} inverted>
                             <Icon name="checkmark" /> Oui
                       </Button>
                     </Link>
